@@ -30,6 +30,7 @@
   <xsl:key name="kRole"  match="d:Role" use="@code"/>
   <xsl:key name="kType"  match="d:MovementType" use="@code"/>
   <xsl:key name="kParty" match="d:Party" use="@code"/>
+  <xsl:key name="kTag"   match="d:Tag" use="@code"/>
 
   <xsl:template match="/d:Details">
     <html lang="{@language}">
@@ -58,6 +59,7 @@
                   background: #16a085; color: #fff; padding: 1px 6px; border-radius: 3px; margin-right: 6px; }
           .tag { font-size: 10px; background: #e8eef3; color: #555; padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
           .payroll { background: #fdecea; color: #b03a2e; }
+          .tag-label { background: #efe3f7; color: #6c3483; }
           .payee { font-weight: 600; }
           .payee.code-only { font-family: ui-monospace, monospace; color: #7d3c98; }
           a.doc { font-size: 11px; color: #2471a3; text-decoration: none; margin-left: 6px; }
@@ -112,7 +114,16 @@
         </tr>
       </thead>
       <tbody>
-        <xsl:apply-templates select="d:Body/d:Chapter"/>
+        <xsl:choose>
+          <!-- hierarchical profile: Chapter > Account > Movement tree -->
+          <xsl:when test="d:Body/d:Chapter">
+            <xsl:apply-templates select="d:Body/d:Chapter"/>
+          </xsl:when>
+          <!-- flat profile: a direct list of movements -->
+          <xsl:otherwise>
+            <xsl:apply-templates select="d:Body/d:Movement"/>
+          </xsl:otherwise>
+        </xsl:choose>
         <tr class="total">
           <td class="l">TOTAL</td>
           <td/><td/><td/>
@@ -157,6 +168,13 @@
   <xsl:template match="d:Movement">
     <tr class="movement">
       <td class="l">
+        <!-- flat profile: show the chart-of-accounts coordinates as columns -->
+        <xsl:if test="@chapterCode">
+          <span class="code"><xsl:value-of select="@chapterCode"/></span>
+        </xsl:if>
+        <xsl:if test="@accountCode">
+          <span class="code"><xsl:value-of select="@accountCode"/></span>
+        </xsl:if>
         <xsl:variable name="mt" select="key('kType',@type)"/>
         <span class="tag">
           <xsl:choose>
@@ -178,6 +196,9 @@
         <xsl:if test="key('kType',@type)/@payroll = 'true'">
           <span class="tag payroll">paie</span>
         </xsl:if>
+        <xsl:for-each select="d:TagRef">
+          <span class="tag tag-label"><xsl:value-of select="key('kTag',@tag)/@name"/></span>
+        </xsl:for-each>
       </td>
       <td class="l"><xsl:value-of select="@description"/></td>
       <td><xsl:call-template name="n"><xsl:with-param name="v" select="@spent"/></xsl:call-template></td>

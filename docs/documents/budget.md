@@ -10,7 +10,7 @@ reference, and it travels as a **confirmed, immutable revision**.
 
 ## Structure
 
-```
+```text
 Budget (@version @profile @language)
   Header
     Transmission        sender / recipient / documentId / issueDate
@@ -53,6 +53,36 @@ A `Chapter` can belong to several grouping axes at once via multiple `GroupRef`
 elements, each pointing at a `Group` that carries a `scheme` (e.g. `line` for
 above/below-the-line, `financier`, …). Multi-axis grouping keeps the format open
 to new classifications without structural change.
+
+## Tags
+
+Beyond the chart of accounts and the grouping axes, a budget line can carry
+**tags** — free, cross-cutting labels orthogonal to the account structure (e.g.
+*tax-credit-eligible*, *eco*, *reshoot*). Tags are declared once in the header:
+
+```xml
+<Tags>
+  <Tag scheme="incentive" code="TAXCRED" name="Tax-credit eligible"/>
+  <Tag scheme="event"     code="RESHOOT" name="Reshoot"/>
+</Tags>
+```
+
+and applied to a `Detail` (or `Item`) with one or more `<TagRef tag="…"/>`:
+
+```xml
+<Detail type="PUR" description="Option and rights" netAmount="80000">
+  <TagRef tag="TAXCRED"/>
+</Detail>
+```
+
+The reference is validated against the header like every other code. Tags enable
+cross-cutting analysis the chart of accounts cannot express — e.g. the total of
+everything tax-credit-eligible across chapters.
+
+**The Budget is the authority for tags.** A Cost Report or Details document that
+uses tags redeclares the subset it needs in its own header (to stay
+self-contained) and MUST keep it consistent with the referenced budget revision.
+See the [Specification](../specification.md#tags-and-cross-document-consistency).
 
 ## Mapping note
 

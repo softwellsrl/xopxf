@@ -10,16 +10,25 @@ format.
 - Examples: `examples/details/full-example.xml` (with the counterparty
   registry), `minimized-example.xml` (same body, registry omitted)
 
-## Analytic only
+## Profiles: hierarchical vs flat
 
-Unlike Budget and Cost Report, Details has **no synthetic/analytic profile**: it
-is by nature the list of individual movements. Summing the movements reconstructs
-the cost report figures, so a "synthetic details" would have no meaning.
+Details is always the list of individual movements — there is no synthetic
+aggregation (summing the movements just reconstructs the cost report). It does,
+however, come in two interchangeable **shapes**, selected by `@profile`:
+
+- **`hierarchical`** (default) — movements nested in the `Chapter > Account` tree,
+  inheriting their chart-of-accounts position from their ancestors.
+- **`flat`** — a single list of movements, each carrying its own `chapterCode`
+  and `accountCode` as columns. The tabular, CSV-friendly form.
+
+Both carry the same movements and sum to the same totals; `flat-example.xml` is
+`full-example.xml` unrolled. The flat form typically keeps only the `spent` /
+`ordered` amounts (no `net`/`charges`/`vat` breakdown).
 
 ## Structure
 
-```
-Details (@version @language)
+```text
+Details (@version @profile(hierarchical|flat) @language)
   Header
     Transmission
     Production
@@ -28,18 +37,21 @@ Details (@version @language)
     Groups* Departments* Producers* Roles*
     MovementTypes*          e.g. INV / PO / PAY / VAR; @payroll flags personal-data lines
     Parties*                the counterparty registry — OPTIONAL (see below)
-  Body
-    Chapter (@code @name)
+    Tags*                   cross-cutting labels, redeclared from the budget
+  Body  (hierarchical)              Body  (flat)
+    Chapter (@code @name)             Movement+ (@chapterCode @accountCode …)
       GroupRef*
-      Account (@code @name @externalCode)
+      Account (@code @name)
         Movement+
 ```
 
 A `Movement` carries `type` (→ `MovementType`), `date`, amounts (`spent`,
 `ordered`, and an optional `net`/`charges`/`gross`/`vat`/`withholding`
 breakdown), references (`role`, `department`, `producer`, `itemRef`), source
-document coordinates (`documentNumber`, `documentDate`), and an optional
-`<Document url="…">` link to the source PDF (invoice, payslip, PO).
+document coordinates (`documentNumber`, `documentDate`), an optional
+`<Document url="…">` link to the source PDF, and optional `<TagRef tag="…"/>`
+cross-cutting labels. In the flat profile it also carries `chapterCode` /
+`accountCode`.
 
 ## Counterparties and data minimisation
 
@@ -74,6 +86,15 @@ This maps directly onto the way a production accounting system already unifies
 the underlying movement: one record with a type, spent/ordered amounts, an
 optional payee identified by code, and a link to the source document — with the
 name resolved (or not) at presentation time.
+
+## Tags
+
+Movements can carry cross-cutting `<TagRef tag="…"/>` labels (e.g.
+tax-credit-eligible, reshoot). The tags used are redeclared in the header's
+`<Tags>` so the document stays self-contained, and they **must** be consistent
+with the budget revision that defines them — see
+[Budget § Tags](budget.md#tags) and the
+[Specification](../specification.md#tags-and-cross-document-consistency).
 
 ## Mapping note
 

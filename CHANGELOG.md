@@ -52,6 +52,14 @@ the `0.x` series. XML namespaces carry the major version
   Number formatting (decimal/grouping separators and pattern) is per-language.
 - **Tooling**: `regen.py` (templates + dictionaries → localized XSLT) and
   `render_examples.py` (examples + XSLT → localized HTML + per-folder indexes).
+- **Tags**: a cross-cutting label vocabulary (`<Tags>` in the header, repeatable
+  `<TagRef>` on budget `Detail`/`Item` and details `Movement`), orthogonal to the
+  chart of accounts. The Budget defines the vocabulary; Cost Report and Details
+  redeclare the subset they use and must keep it consistent with the referenced
+  budget revision (verified by importers). References are enforced in-schema.
+- **Details flat profile**: `profile="hierarchical|flat"`. The flat form is a
+  single list of movements, each carrying its own `chapterCode`/`accountCode`,
+  summing to the same totals as the hierarchical tree. Worked `flat-example.xml`.
 - **Documentation** under `docs/` (MkDocs site): specification, a page per
   document, localization, validating & rendering, and an FAQ.
 

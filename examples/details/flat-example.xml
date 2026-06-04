@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Details, flat profile: the SAME movements as full-example.xml, but as a single
+     flat list instead of the Chapter > Account > Movement tree. Each movement
+     carries its own chapterCode / accountCode as columns, and only the spent /
+     ordered amounts (no net/charges/vat breakdown) — the tabular, CSV-friendly
+     form. Totals are identical to the hierarchical example. All names fictitious. -->
+<Details xmlns="urn:xopxf:details:1.0" version="0.1.0" profile="flat" language="en">
+
+  <Header>
+    <Transmission>
+      <Sender>
+        <Name>Northwind Pictures Ltd</Name>
+        <VatId>GB000000000</VatId>
+      </Sender>
+      <Recipient>
+        <Name>Acme Broadcasting Group</Name>
+      </Recipient>
+      <DocumentId>NWP-LONGWINTER-DET-012-FLAT</DocumentId>
+      <IssueDate>2026-12-22</IssueDate>
+    </Transmission>
+
+    <Production>
+      <Code>LONGWINTER</Code>
+      <Title>The Long Winter</Title>
+      <Episodes>8</Episodes>
+      <Currency>EUR</Currency>
+    </Production>
+
+    <BudgetReference productionCode="LONGWINTER" revision="003"
+                     documentId="NWP-LONGWINTER-BDG-003" date="2026-05-20"/>
+    <CostReportReference documentId="NWP-LONGWINTER-CR-012" number="012" asOf="2026-12-20"/>
+
+    <Departments>
+      <Department code="CAST"  name="Cast"/>
+      <Department code="CAM"   name="Camera"/>
+      <Department code="LIGHT" name="Lighting"/>
+    </Departments>
+
+    <Producers>
+      <Producer code="NWP" name="Northwind Pictures Ltd"/>
+      <Producer code="SCP" name="Silverpeak Co-Production"/>
+    </Producers>
+
+    <Roles>
+      <Role code="LEAD"   name="Lead actor"/>
+      <Role code="DOP"    name="Director of photography"/>
+      <Role code="CAMOP"  name="Camera operator"/>
+      <Role code="GAFFER" name="Gaffer"/>
+    </Roles>
+
+    <MovementTypes>
+      <MovementType code="INV" name="Supplier invoice"/>
+      <MovementType code="PO"  name="Purchase order"/>
+      <MovementType code="PAY" name="Payroll" payroll="true"/>
+      <MovementType code="VAR" name="Variation"/>
+    </MovementTypes>
+
+    <Parties>
+      <Party code="P0101" type="person"  personName="Eleanor Vance"  role="LEAD"   city="London"/>
+      <Party code="P0102" type="person"  personName="Marcus Bellini" role="DOP"    city="Rome"/>
+      <Party code="P0103" type="person"  personName="Sofia Kallio"    role="CAMOP"  city="Helsinki"/>
+      <Party code="P0104" type="person"  personName="Tom Aldridge"    role="GAFFER" city="Manchester"/>
+      <Party code="C2001" type="company" legalName="Apex Camera Rental Ltd"  vatId="GB111111111" city="London"/>
+      <Party code="C2002" type="company" legalName="Bright Lighting Hire SpA" vatId="IT22222222222" city="Milan"/>
+    </Parties>
+
+    <Tags>
+      <Tag scheme="incentive" code="TAXCRED" name="Tax-credit eligible"/>
+      <Tag scheme="event"     code="RESHOOT" name="Reshoot"/>
+    </Tags>
+  </Header>
+
+  <!-- Flat body: a direct list of movements, chart-of-accounts coordinates carried
+       as columns. Same eight movements and same totals as full-example.xml. -->
+  <Body>
+    <Movement chapterCode="1300" accountCode="1301" type="PAY" date="2026-11-30"
+              payeeRef="P0101" role="LEAD" department="CAST" producer="NWP" itemRef="A004"
+              description="Lead actor fee, November instalment" spent="60000">
+      <Document url="https://docs.example.com/payslips/P0101-2026-11.pdf" type="payslip"/>
+      <TagRef tag="TAXCRED"/>
+    </Movement>
+    <Movement chapterCode="1300" accountCode="1301" type="PAY" date="2026-11-30"
+              payeeRef="P0101" role="LEAD" department="CAST" producer="NWP" itemRef="A004"
+              documentNumber="ADV-A004-02" description="Lead actor fee, advance" spent="60000"/>
+    <Movement chapterCode="2400" accountCode="2401" type="PAY" date="2026-12-13"
+              payeeRef="P0102" role="DOP" department="CAM" producer="NWP" itemRef="B003"
+              description="DoP weekly payroll" spent="9750"/>
+    <Movement chapterCode="2400" accountCode="2401" type="PAY" date="2026-12-13"
+              payeeRef="P0103" role="CAMOP" department="CAM" producer="NWP" itemRef="B004"
+              description="Camera operator weekly payroll" spent="7200"/>
+    <Movement chapterCode="2400" accountCode="2402" type="INV" date="2026-12-10"
+              payeeRef="C2001" department="CAM" producer="SCP" itemRef="B005"
+              documentNumber="APX-2026-4471" documentDate="2026-12-08"
+              description="Camera package weekly rental" spent="12000">
+      <Document url="https://docs.example.com/invoices/APX-2026-4471.pdf" type="invoice"/>
+      <TagRef tag="TAXCRED"/>
+      <TagRef tag="RESHOOT"/>
+    </Movement>
+    <Movement chapterCode="2400" accountCode="2402" type="PO" date="2026-12-05"
+              payeeRef="C2001" department="CAM" producer="SCP" itemRef="B005"
+              documentNumber="PO-2026-0312" description="Camera package, remaining shoot"
+              ordered="36000"/>
+    <Movement chapterCode="2400" accountCode="2403" type="INV" date="2026-12-11"
+              payeeRef="C2002" department="LIGHT" producer="NWP" itemRef="B006"
+              documentNumber="BLH-2026-119" documentDate="2026-12-09"
+              description="Lighting package rental" spent="18000">
+      <Document url="https://docs.example.com/invoices/BLH-2026-119.pdf" type="invoice"/>
+    </Movement>
+    <Movement chapterCode="2400" accountCode="2403" type="PAY" date="2026-12-13"
+              payeeRef="P0104" role="GAFFER" department="LIGHT" producer="NWP" itemRef="B006"
+              description="Gaffer weekly payroll" spent="4500"/>
+  </Body>
+</Details>

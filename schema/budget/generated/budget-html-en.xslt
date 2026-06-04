@@ -27,6 +27,7 @@
   <xsl:key name="kVat"        match="b:VatRate"        use="@code"/>
   <xsl:key name="kWithhold"   match="b:WithholdingRate" use="@code"/>
   <xsl:key name="kGroup"      match="b:Group"          use="@code"/>
+  <xsl:key name="kTag"        match="b:Tag"            use="@code"/>
 
   <!-- ============================================================ -->
   <xsl:template match="/b:Budget">
@@ -73,6 +74,7 @@
                         background: #fafafa; }
           .tag { font-size: 10px; background: #e8eef3; color: #555;
                  padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
+          .tag-label { background: #efe3f7; color: #6c3483; }
         </style>
       </head>
       <body>
@@ -286,7 +288,11 @@
           <xsl:text> contingency</xsl:text>
         </xsl:if>
       </xsl:attribute>
-      <td class="desc"><xsl:value-of select="@description"/></td>
+      <td class="desc"><xsl:value-of select="@description"/>
+        <xsl:for-each select="b:TagRef">
+          <span class="tag tag-label"><xsl:value-of select="key('kTag', @tag)/@name"/></span>
+        </xsl:for-each>
+      </td>
       <td><xsl:value-of select="key('kDetailType', @type)/@name"/></td>
       <td>
         <xsl:if test="@phase">

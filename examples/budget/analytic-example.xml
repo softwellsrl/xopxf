@@ -112,6 +112,15 @@
       <WithholdingRate code="W20" name="Withholding 20%" rate="20.00"/>
       <WithholdingRate code="W23" name="Withholding 23%" rate="23.00"/>
     </WithholdingRates>
+
+    <!-- Cross-cutting labels, orthogonal to the chart of accounts. The budget
+         DEFINES them here; cost reports and details that use them redeclare the
+         subset they need and keep it consistent with this revision. -->
+    <Tags>
+      <Tag scheme="incentive" code="TAXCRED" name="Tax-credit eligible"/>
+      <Tag scheme="incentive" code="ECO"     name="Eco/green production"/>
+      <Tag scheme="event"     code="RESHOOT" name="Reshoot"/>
+    </Tags>
   </Header>
 
   <Body>
@@ -124,7 +133,9 @@
         <Item ref="A001" name="Underlying rights" department="PROD" producer="NWP">
           <Detail type="PUR" description="Option and rights to source novel"
                   phase="DEV" quantity="1" unitPrice="80000" unitOfMeasure="FLAT"
-                  netAmount="80000" vatRate="ZERO"/>
+                  netAmount="80000" vatRate="ZERO">
+            <TagRef tag="TAXCRED"/>
+          </Detail>
         </Item>
       </Account>
       <Account code="1102" name="Writing" externalCode="011.002">
@@ -145,7 +156,10 @@
         <Item ref="A003" name="Series director" department="DIR" producer="NWP">
           <Detail type="FEE" description="Director, prep to delivery"
                   phase="SHOOT" role="DIR" resources="1" quantity="20" unitPrice="6000"
-                  unitOfMeasure="WK" netAmount="120000" vatRate="ZERO" withholdingRate="W20"/>
+                  unitOfMeasure="WK" netAmount="120000" vatRate="ZERO" withholdingRate="W20">
+            <TagRef tag="TAXCRED"/>
+            <TagRef tag="RESHOOT"/>
+          </Detail>
         </Item>
       </Account>
     </Chapter>

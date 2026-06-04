@@ -17,7 +17,7 @@ are expected to exist in that budget revision.
 
 ## Structure
 
-```
+```text
 CostReport (@version @profile @language)
   Header
     Transmission

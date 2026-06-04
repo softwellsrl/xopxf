@@ -69,6 +69,12 @@
       <Party code="C2001" type="company" legalName="Apex Camera Rental Ltd"  vatId="GB111111111" city="London"/>
       <Party code="C2002" type="company" legalName="Bright Lighting Hire SpA" vatId="IT22222222222" city="Milan"/>
     </Parties>
+
+    <!-- Tags redeclared from budget revision 003 (subset used by these movements). -->
+    <Tags>
+      <Tag scheme="incentive" code="TAXCRED" name="Tax-credit eligible"/>
+      <Tag scheme="event"     code="RESHOOT" name="Reshoot"/>
+    </Tags>
   </Header>
 
   <Body>
@@ -81,6 +87,7 @@
                   description="Lead actor fee, November instalment"
                   spent="60000" net="50000" charges="10000" gross="60000">
           <Document url="https://docs.example.com/payslips/P0101-2026-11.pdf" type="payslip"/>
+          <TagRef tag="TAXCRED"/>
         </Movement>
         <Movement type="PAY" date="2026-11-30" payeeRef="P0101" role="LEAD"
                   department="CAST" producer="NWP" itemRef="A004"
@@ -109,6 +116,8 @@
                   description="Camera package weekly rental"
                   spent="12000" net="9836" vat="2164" gross="12000">
           <Document url="https://docs.example.com/invoices/APX-2026-4471.pdf" type="invoice"/>
+          <TagRef tag="TAXCRED"/>
+          <TagRef tag="RESHOOT"/>
         </Movement>
         <Movement type="PO" date="2026-12-05" payeeRef="C2001"
                   department="CAM" producer="SCP" itemRef="B005"

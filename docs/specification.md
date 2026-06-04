@@ -66,8 +66,32 @@ must be declared in the header, so a document with a dangling reference is
 
 An analytic document always reduces to the equivalent synthetic one by summing
 the breakdown level, so the two profiles describe the *same* totals at different
-granularity. **Details** has no profile: it is by nature the list of individual
-movements (a "synthetic details" would just be the cost report).
+granularity. **Details** has no synthetic/analytic distinction, but carries its
+own pair of interchangeable shapes — `hierarchical` (the `Chapter > Account`
+tree) and `flat` (a single list of movements, each carrying its own
+`chapterCode`/`accountCode`). Both sum to the same totals; the flat form is the
+tabular, CSV-friendly projection.
+
+## Tags and cross-document consistency
+
+Beyond chapters, accounts and grouping axes, a line can carry **tags** — free,
+cross-cutting labels orthogonal to the chart of accounts (e.g. tax-credit
+eligibility, reshoot). Tags are declared in a header `<Tags>` vocabulary and
+applied with repeatable `<TagRef tag="…"/>` elements on a budget `Detail`/`Item`
+or a details `Movement`; the reference is enforced against the header like any
+other code.
+
+The **Budget is the authority** for the tag vocabulary. A Cost Report or Details
+document that uses tags **redeclares** the subset it needs in its own header — so
+it remains self-contained — and that redeclaration **MUST** be consistent (same
+`code`, `name`, `scheme`) with the budget revision it references.
+
+Consistency *across* documents is beyond what XML Schema can check (an XSD
+validates one document against one schema, not two documents against each other).
+It is therefore a **normative rule verified by importers**: a system ingesting a
+Details document checks its tag declarations — and its chapter/account codes —
+against the referenced budget and reports any mismatch. The same applies to other
+redeclared vocabularies.
 
 ## Inter-document references
 

@@ -61,6 +61,11 @@
         <xs:element name="Body"   type="BodyType"/>
       </xs:sequence>
       <xs:attribute name="version"  type="xs:string"   use="required"/>
+      <!-- hierarchical = Chapter > Account > Movement tree (default);
+           flat         = a single list of movements, each carrying its own
+                          chapterCode / accountCode as columns. Same movements,
+                          same totals; flat is the tabular/CSV-friendly form. -->
+      <xs:attribute name="profile"  type="ProfileType" use="optional" default="hierarchical"/>
       <!-- ISO 639-1 language of the human-readable data (descriptions, names) -->
       <xs:attribute name="language" type="xs:language"  use="optional"/>
     </xs:complexType>
@@ -96,6 +101,10 @@
       <xs:selector xpath="d:Header/d:Parties/d:Party"/>
       <xs:field xpath="@code"/>
     </xs:key>
+    <xs:key name="tagKey">
+      <xs:selector xpath="d:Header/d:Tags/d:Tag"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
 
     <xs:keyref name="groupRef" refer="groupKey">
       <xs:selector xpath="d:Body/d:Chapter/d:GroupRef"/>
@@ -122,6 +131,10 @@
       <xs:selector xpath="d:Header/d:Parties/d:Party"/>
       <xs:field xpath="@role"/>
     </xs:keyref>
+    <xs:keyref name="tagRef" refer="tagKey">
+      <xs:selector xpath=".//d:TagRef"/>
+      <xs:field xpath="@tag"/>
+    </xs:keyref>
   </xs:element>
 
   <!-- ============================================================= -->
@@ -143,6 +156,9 @@
       <xs:element name="MovementTypes" type="MovementTypeListType" minOccurs="0"/>
       <!-- counterparty registry: optional by design (data minimisation) -->
       <xs:element name="Parties"       type="PartyListType"        minOccurs="0"/>
+      <!-- cross-cutting tags: redeclared here, MUST be consistent with the
+           referenced budget revision (verified by importers, not the schema) -->
+      <xs:element name="Tags"          type="TagListType"          minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -278,12 +294,20 @@
   </xs:complexType>
 
   <!-- ============================================================= -->
-  <!--  BODY  (chapters > accounts > movements)                       -->
+  <!--  BODY                                                          -->
+  <!--  Two equivalent shapes, selected by the root @profile:          -->
+  <!--   hierarchical = Chapter > Account > Movement (default)          -->
+  <!--   flat         = a direct list of Movement, each carrying its    -->
+  <!--                  own chapterCode / accountCode. Same movements,   -->
+  <!--                  same totals. XSD cannot bind @profile to the     -->
+  <!--                  chosen shape; the choice below allows either,    -->
+  <!--                  and the profile attribute states the intent.     -->
   <!-- ============================================================= -->
   <xs:complexType name="BodyType">
-    <xs:sequence>
-      <xs:element name="Chapter" type="ChapterType" maxOccurs="unbounded"/>
-    </xs:sequence>
+    <xs:choice>
+      <xs:element name="Chapter"  type="ChapterType"   maxOccurs="unbounded"/>
+      <xs:element name="Movement" type="MovementType_" maxOccurs="unbounded"/>
+    </xs:choice>
   </xs:complexType>
 
   <xs:complexType name="ChapterType">
@@ -316,8 +340,15 @@
     <xs:sequence>
       <!-- optional link to the source document (invoice/PO/payslip PDF) -->
       <xs:element name="Document" type="DocumentType" minOccurs="0"/>
+      <!-- cross-cutting tags declared in Header/Tags -->
+      <xs:element name="TagRef"   type="TagRefType"   minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="type"        type="xs:string"  use="required"/>
+    <!-- chart-of-accounts coordinates. In the hierarchical profile they are
+         implied by the Chapter/Account ancestors; in the flat profile each
+         movement carries them as columns. -->
+    <xs:attribute name="chapterCode" type="xs:string"  use="optional"/>
+    <xs:attribute name="accountCode" type="xs:string"  use="optional"/>
     <xs:attribute name="date"        type="xs:date"    use="optional"/>
     <!-- counterparty by code only; resolved via Header/Parties when present -->
     <xs:attribute name="payeeRef"    type="xs:string"  use="optional"/>
@@ -347,9 +378,36 @@
     <xs:attribute name="type" type="xs:string" use="optional"/>
   </xs:complexType>
 
+  <!-- A reference to a Tag declared in Header/Tags. Cross-cutting, repeatable. -->
+  <xs:complexType name="TagRefType">
+    <xs:attribute name="tag" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- Tag vocabulary, redeclared from the referenced budget revision. See the
+       Budget schema for the authoritative definition; here it is the subset the
+       movements use. Importers verify consistency with the budget. -->
+  <xs:complexType name="TagListType">
+    <xs:sequence>
+      <xs:element name="Tag" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code"   type="xs:string" use="required"/>
+          <xs:attribute name="name"   type="xs:string" use="required"/>
+          <xs:attribute name="scheme" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <!-- ============================================================= -->
   <!--  Simple types                                                  -->
   <!-- ============================================================= -->
+  <xs:simpleType name="ProfileType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="hierarchical"/>
+      <xs:enumeration value="flat"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="PartyKind">
     <xs:restriction base="xs:string">
       <xs:enumeration value="person"/>

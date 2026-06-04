@@ -87,6 +87,10 @@
       <xs:selector xpath="b:Header/b:Groups/b:Group"/>
       <xs:field xpath="@code"/>
     </xs:key>
+    <xs:key name="tagKey">
+      <xs:selector xpath="b:Header/b:Tags/b:Tag"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
 
     <!-- Body references resolved against the Header keys above -->
     <xs:keyref name="groupRef" refer="groupKey">
@@ -125,6 +129,10 @@
       <xs:selector xpath=".//b:Item"/>
       <xs:field xpath="@producer"/>
     </xs:keyref>
+    <xs:keyref name="tagRef" refer="tagKey">
+      <xs:selector xpath=".//b:TagRef"/>
+      <xs:field xpath="@tag"/>
+    </xs:keyref>
   </xs:element>
 
   <!-- ============================================================= -->
@@ -148,6 +156,7 @@
       <xs:element name="DetailTypes"      type="DetailTypeListType"   minOccurs="0"/>
       <xs:element name="VatRates"         type="VatRateListType"      minOccurs="0"/>
       <xs:element name="WithholdingRates" type="WithholdingListType"  minOccurs="0"/>
+      <xs:element name="Tags"             type="TagListType"          minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -309,6 +318,24 @@
     </xs:sequence>
   </xs:complexType>
 
+  <!-- Tag: a free, cross-cutting label applicable to budget lines, orthogonal to
+       the chart of accounts (e.g. tax-credit-eligible, reshoot, covid). The
+       optional 'scheme' groups tags into families. The Budget DEFINES the tag
+       vocabulary; documents that USE tags (Cost Report, Details) redeclare the
+       subset they use in their own header and MUST keep it consistent with the
+       referenced budget revision (verified by importers, not by the schema). -->
+  <xs:complexType name="TagListType">
+    <xs:sequence>
+      <xs:element name="Tag" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code"   type="xs:string" use="required"/>
+          <xs:attribute name="name"   type="xs:string" use="required"/>
+          <xs:attribute name="scheme" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
   <!-- ============================================================= -->
   <!--  BODY  (chapters > accounts > [items] > details)               -->
   <!-- ============================================================= -->
@@ -358,9 +385,18 @@
     <xs:attribute name="producer"   type="xs:string" use="optional"/>
   </xs:complexType>
 
+  <!-- A reference to a Tag declared in Header/Tags. Cross-cutting, repeatable. -->
+  <xs:complexType name="TagRefType">
+    <xs:attribute name="tag" type="xs:string" use="required"/>
+  </xs:complexType>
+
   <!-- A budget detail line. Amounts are the actual figures; rates/types are
-       references into the Header vocabularies. -->
+       references into the Header vocabularies. Optional TagRef elements apply
+       cross-cutting labels declared in Header/Tags. -->
   <xs:complexType name="DetailType_">
+    <xs:sequence>
+      <xs:element name="TagRef" type="TagRefType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
     <xs:attribute name="type"           type="xs:string"  use="required"/>
     <xs:attribute name="description"    type="xs:string"  use="optional"/>
     <xs:attribute name="phase"          type="xs:string"  use="optional"/>

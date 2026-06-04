@@ -45,6 +45,7 @@ RENDERS = [
     # details: full (with Parties) and minimized (without)
     ("examples/details/full-example.xml",      "schema/details/generated/details-html",  "examples/details/full-example"),
     ("examples/details/minimized-example.xml", "schema/details/generated/details-html",  "examples/details/minimized-example"),
+    ("examples/details/flat-example.xml",      "schema/details/generated/details-html",  "examples/details/flat-example"),
 ]
 
 
