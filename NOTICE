@@ -1,0 +1,10 @@
+XOPXF — eXtended Open Production eXchange Format
+Copyright 2026 Softwell S.r.l.
+
+XOPXF is an open interchange format proposed by Softwell S.r.l.
+
+Schemas, stylesheets and example code (schema/, examples/) are licensed under
+the Apache License, Version 2.0 (see LICENSE).
+
+Documentation prose (docs/, README.md) is licensed under the Creative Commons
+Attribution 4.0 International License (see LICENSE-docs).

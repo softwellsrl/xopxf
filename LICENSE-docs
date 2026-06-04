@@ -1,0 +1,20 @@
+XOPXF Documentation License
+===========================
+
+The documentation prose in this repository — including this directory's files,
+the docs/ directory, and README.md — is licensed under the
+
+    Creative Commons Attribution 4.0 International License (CC-BY-4.0)
+
+You are free to share and adapt the material for any purpose, even commercially,
+provided you give appropriate credit.
+
+Full license text: https://creativecommons.org/licenses/by/4.0/legalcode
+Summary:           https://creativecommons.org/licenses/by/4.0/
+
+Attribution: "XOPXF — eXtended Open Production eXchange Format, proposed by
+Softwell S.r.l."
+
+Note: schemas, stylesheets and example code (schema/, examples/) are NOT covered
+by this license; they are licensed under the Apache License, Version 2.0 (see
+LICENSE).

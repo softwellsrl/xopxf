@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Editor / IDE
+.idea/
+.vscode/
+*~
+
+# Python (validation/tooling scratch)
+__pycache__/
+*.py[cod]
+.venv/
+venv/

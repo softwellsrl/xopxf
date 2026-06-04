@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Analytic profile: Chapter > Account > Item > Detail.
+     Realistic sample of a TV series production budget. All names are fictitious
+     to avoid any reference to real companies or productions. Figures are
+     illustrative. This is the full (analytic) form; synthetic-example.xml is the
+     same budget degraded to Chapter > Account > Detail. -->
+<Budget xmlns="urn:xopxf:budget:1.0"
+        version="1.0" profile="analytic" language="en">
+
+  <Header>
+    <Transmission>
+      <Sender>
+        <Name>Northwind Pictures Ltd</Name>
+        <VatId>GB000000000</VatId>
+        <Email>budget@northwind.example</Email>
+      </Sender>
+      <Recipient>
+        <Name>Acme Broadcasting Group</Name>
+      </Recipient>
+      <DocumentId>NWP-LONGWINTER-BDG-003</DocumentId>
+      <IssueDate>2026-05-20</IssueDate>
+    </Transmission>
+
+    <Production>
+      <Code>LONGWINTER</Code>
+      <Title>The Long Winter</Title>
+      <Episodes>8</Episodes>
+      <Producer>Northwind Pictures Ltd</Producer>
+      <StartDate>2026-09-01</StartDate>
+      <EndDate>2027-05-31</EndDate>
+      <Currency>EUR</Currency>
+    </Production>
+
+    <Revision number="003" status="confirmed" date="2026-05-20"
+              closingDate="2026-05-20" description="Approved revision, pre-shoot"/>
+
+    <!-- Vocabularies valid for THIS revision. Two grouping schemes are declared
+         to show the multi-axis capability: 'line' (above/below/post) and
+         'financier' (who funds which chapters). -->
+    <Groups>
+      <Group scheme="line" code="ATL"    name="Above the line"/>
+      <Group scheme="line" code="BTL"    name="Below the line"/>
+      <Group scheme="line" code="POST"   name="Post-production"/>
+      <Group scheme="line" code="TRAVEL" name="Travel and living"/>
+      <Group scheme="line" code="FEE"    name="Producer fee and overhead"/>
+      <Group scheme="financier" code="BCAST" name="Broadcaster share"/>
+      <Group scheme="financier" code="FUND"  name="Public fund / tax credit"/>
+    </Groups>
+
+    <Phases>
+      <Phase code="DEV"   name="Development" startDate="2026-09-01" endDate="2026-09-30"/>
+      <Phase code="PREP"  name="Pre-production" startDate="2026-10-01" endDate="2026-11-15"/>
+      <Phase code="SHOOT" name="Principal photography" startDate="2026-11-16" endDate="2027-02-15"/>
+      <Phase code="WRAP"  name="Wrap" startDate="2027-02-16" endDate="2027-02-28"/>
+      <Phase code="POST"  name="Post-production" startDate="2027-03-01" endDate="2027-05-31"/>
+    </Phases>
+
+    <Departments>
+      <Department code="PROD" name="Production office"/>
+      <Department code="DIR"  name="Direction"/>
+      <Department code="CAST" name="Cast"/>
+      <Department code="CAM"  name="Camera"/>
+      <Department code="LIGHT" name="Lighting"/>
+      <Department code="ART"  name="Art department"/>
+      <Department code="COST" name="Costume and make-up"/>
+      <Department code="SND"  name="Sound"/>
+      <Department code="LOC"  name="Locations"/>
+      <Department code="EDIT" name="Editing"/>
+    </Departments>
+
+    <Producers>
+      <Producer code="NWP" name="Northwind Pictures Ltd" vatId="GB000000000"/>
+      <Producer code="SCP" name="Silverpeak Co-Production"/>
+    </Producers>
+
+    <Roles>
+      <Role code="EP"    name="Executive producer"/>
+      <Role code="LP"    name="Line producer"/>
+      <Role code="DIR"   name="Director"/>
+      <Role code="WRIT"  name="Writer"/>
+      <Role code="LEAD"  name="Lead actor"/>
+      <Role code="SUPP"  name="Supporting actor"/>
+      <Role code="DOP"   name="Director of photography"/>
+      <Role code="GAFF"  name="Gaffer"/>
+      <Role code="PD"    name="Production designer"/>
+      <Role code="COSD"  name="Costume designer"/>
+      <Role code="SREC"  name="Sound recordist"/>
+      <Role code="EDIT"  name="Editor"/>
+    </Roles>
+
+    <UnitsOfMeasure>
+      <UnitOfMeasure code="WK"   name="Week"/>
+      <UnitOfMeasure code="DAY"  name="Day"/>
+      <UnitOfMeasure code="FLAT" name="Flat fee"/>
+      <UnitOfMeasure code="ITEM" name="Item"/>
+    </UnitsOfMeasure>
+
+    <DetailTypes>
+      <DetailType code="PUR" name="Purchase / rental"/>
+      <DetailType code="FEE" name="Fee / compensation"/>
+      <DetailType code="RIS" name="Contingency" contingency="true"/>
+    </DetailTypes>
+
+    <VatRates>
+      <VatRate code="STD"  name="Standard rate 22%" rate="22.00"/>
+      <VatRate code="RED"  name="Reduced rate 10%"  rate="10.00"/>
+      <VatRate code="ZERO" name="Zero rated"        rate="0.00"/>
+    </VatRates>
+
+    <WithholdingRates>
+      <WithholdingRate code="NO"  name="No withholding" rate="0.00"/>
+      <WithholdingRate code="W20" name="Withholding 20%" rate="20.00"/>
+      <WithholdingRate code="W23" name="Withholding 23%" rate="23.00"/>
+    </WithholdingRates>
+  </Header>
+
+  <Body>
+
+    <!-- ===================== ABOVE THE LINE ===================== -->
+    <Chapter code="1100" name="Story and rights">
+      <GroupRef group="ATL"/>
+      <GroupRef group="FUND"/>
+      <Account code="1101" name="Rights acquisition" externalCode="011.001">
+        <Item ref="A001" name="Underlying rights" department="PROD" producer="NWP">
+          <Detail type="PUR" description="Option and rights to source novel"
+                  phase="DEV" quantity="1" unitPrice="80000" unitOfMeasure="FLAT"
+                  netAmount="80000" vatRate="ZERO"/>
+        </Item>
+      </Account>
+      <Account code="1102" name="Writing" externalCode="011.002">
+        <Item ref="A002" name="Screenwriters" department="DIR" producer="NWP">
+          <Detail type="FEE" description="Head writer, 8 episodes"
+                  phase="DEV" role="WRIT" resources="1" quantity="8" unitPrice="12000"
+                  unitOfMeasure="ITEM" netAmount="96000" vatRate="ZERO" withholdingRate="W20"/>
+          <Detail type="FEE" description="Staff writers"
+                  phase="DEV" role="WRIT" resources="2" quantity="6" unitPrice="5000"
+                  unitOfMeasure="WK" netAmount="60000" vatRate="ZERO" withholdingRate="W20"/>
+        </Item>
+      </Account>
+    </Chapter>
+
+    <Chapter code="1200" name="Direction">
+      <GroupRef group="ATL"/>
+      <Account code="1201" name="Director" externalCode="012.001">
+        <Item ref="A003" name="Series director" department="DIR" producer="NWP">
+          <Detail type="FEE" description="Director, prep to delivery"
+                  phase="SHOOT" role="DIR" resources="1" quantity="20" unitPrice="6000"
+                  unitOfMeasure="WK" netAmount="120000" vatRate="ZERO" withholdingRate="W20"/>
+        </Item>
+      </Account>
+    </Chapter>
+
+    <Chapter code="1300" name="Principal cast">
+      <GroupRef group="ATL"/>
+      <Account code="1301" name="Lead cast" externalCode="013.001">
+        <Item ref="A004" name="Lead role" department="CAST" producer="NWP">
+          <Detail type="FEE" description="Lead actor, season"
+                  phase="SHOOT" role="LEAD" resources="1" quantity="13" unitPrice="15000"
+                  unitOfMeasure="WK" netAmount="195000" vatRate="ZERO" withholdingRate="W20"/>
+        </Item>
+        <Item ref="A005" name="Co-lead role" department="CAST" producer="NWP">
+          <Detail type="FEE" description="Co-lead actor, season"
+                  phase="SHOOT" role="LEAD" resources="1" quantity="13" unitPrice="10000"
+                  unitOfMeasure="WK" netAmount="130000" vatRate="ZERO" withholdingRate="W20"/>
+        </Item>
+      </Account>
+      <Account code="1302" name="Supporting cast" externalCode="013.002">
+        <Item ref="A006" name="Supporting roles" department="CAST" producer="NWP">
+          <Detail type="FEE" description="Supporting cast, pooled"
+                  phase="SHOOT" role="SUPP" resources="6" quantity="8" unitPrice="2500"
+                  unitOfMeasure="WK" netAmount="120000" vatRate="ZERO" withholdingRate="W20"/>
+        </Item>
+      </Account>
+    </Chapter>
+
+    <!-- ===================== BELOW THE LINE ===================== -->
+    <Chapter code="2000" name="Production unit">
+      <GroupRef group="BTL"/>
+      <GroupRef group="BCAST"/>
+      <Account code="2001" name="Production staff" externalCode="020.001">
+        <Item ref="B001" name="Line producer" department="PROD" producer="NWP">
+          <Detail type="FEE" description="Line producer"
+                  phase="PREP" role="LP" resources="1" quantity="28" unitPrice="3500"
+                  unitOfMeasure="WK" netAmount="98000" socialCharges="29400"
+                  grossAmount="127400" withholdingRate="NO"/>
+        </Item>
+        <Item ref="B002" name="Production coordination" department="PROD" producer="NWP">
+          <Detail type="FEE" description="Production coordinator + assistants"
+                  phase="PREP" resources="3" quantity="24" unitPrice="1200"
+                  unitOfMeasure="WK" netAmount="86400" socialCharges="25920"
+                  grossAmount="112320"/>
+          <Detail type="PUR" description="Production office rental and supplies"
+                  phase="PREP" quantity="7" unitPrice="3000" unitOfMeasure="WK"
+                  netAmount="21000" vatRate="STD"/>
+        </Item>
+      </Account>
+    </Chapter>
+
+    <Chapter code="2400" name="Camera and lighting">
+      <GroupRef group="BTL"/>
+      <GroupRef group="BCAST"/>
+      <Account code="2401" name="Camera crew" externalCode="024.001">
+        <Item ref="B003" name="Director of photography" department="CAM" producer="NWP">
+          <Detail type="FEE" description="DOP"
+                  phase="SHOOT" role="DOP" resources="1" quantity="13" unitPrice="4500"
+                  unitOfMeasure="WK" netAmount="58500" socialCharges="17550"
+                  grossAmount="76050"/>
+        </Item>
+        <Item ref="B004" name="Camera operators" department="CAM" producer="NWP">
+          <Detail type="FEE" description="Camera operators and assistants"
+                  phase="SHOOT" resources="4" quantity="13" unitPrice="1800"
+                  unitOfMeasure="WK" netAmount="93600" socialCharges="28080"
+                  grossAmount="121680"/>
+        </Item>
+      </Account>
+      <Account code="2402" name="Camera equipment" externalCode="024.002">
+        <Item ref="B005" name="Camera package" department="CAM" producer="SCP">
+          <Detail type="PUR" description="Camera bodies, lenses, accessories rental"
+                  phase="SHOOT" quantity="13" unitPrice="6000" unitOfMeasure="WK"
+                  netAmount="78000" vatRate="STD"/>
+        </Item>
+      </Account>
+      <Account code="2403" name="Lighting" externalCode="024.003">
+        <Item ref="B006" name="Lighting crew" department="LIGHT" producer="NWP">
+          <Detail type="FEE" description="Gaffer and electricians"
+                  phase="SHOOT" role="GAFF" resources="3" quantity="13" unitPrice="1600"
+                  unitOfMeasure="WK" netAmount="62400" socialCharges="18720"
+                  grossAmount="81120"/>
+          <Detail type="PUR" description="Lighting and grip equipment rental"
+                  phase="SHOOT" quantity="13" unitPrice="3500" unitOfMeasure="WK"
+                  netAmount="45500" vatRate="STD"/>
+        </Item>
+      </Account>
+    </Chapter>
+
+    <Chapter code="2700" name="Art department">
+      <GroupRef group="BTL"/>
+      <Account code="2701" name="Art crew" externalCode="027.001">
+        <Item ref="B007" name="Production design" department="ART" producer="NWP">
+          <Detail type="FEE" description="Production designer + art crew"
+                  phase="PREP" role="PD" resources="4" quantity="20" unitPrice="1500"
+                  unitOfMeasure="WK" netAmount="120000" socialCharges="36000"
+                  grossAmount="156000"/>
+        </Item>
+      </Account>
+      <Account code="2702" name="Sets and construction" externalCode="027.002">
+        <Item ref="B008" name="Set construction" department="ART" producer="NWP">
+          <Detail type="PUR" description="Set construction materials and labour"
+                  phase="PREP" quantity="1" unitPrice="180000" unitOfMeasure="FLAT"
+                  netAmount="180000" vatRate="STD"/>
+          <Detail type="PUR" description="Set dressing and props"
+                  phase="SHOOT" quantity="1" unitPrice="60000" unitOfMeasure="FLAT"
+                  netAmount="60000" vatRate="STD"/>
+        </Item>
+      </Account>
+    </Chapter>
+
+    <Chapter code="2800" name="Costume and make-up">
+      <GroupRef group="BTL"/>
+      <Account code="2801" name="Costume" externalCode="028.001">
+        <Item ref="B009" name="Costume" department="COST" producer="NWP">
+          <Detail type="FEE" description="Costume designer and crew"
+                  phase="PREP" role="COSD" resources="3" quantity="18" unitPrice="1300"
+                  unitOfMeasure="WK" netAmount="70200" socialCharges="21060"
+                  grossAmount="91260"/>
+          <Detail type="PUR" description="Costumes purchase and rental"
+                  phase="SHOOT" quantity="1" unitPrice="55000" unitOfMeasure="FLAT"
+                  netAmount="55000" vatRate="STD"/>
+        </Item>
+      </Account>
+    </Chapter>
+
+    <Chapter code="2600" name="Sound">
+      <GroupRef group="BTL"/>
+      <Account code="2601" name="Production sound" externalCode="026.001">
+        <Item ref="B010" name="Sound crew" department="SND" producer="NWP">
+          <Detail type="FEE" description="Sound recordist and boom operator"
+                  phase="SHOOT" role="SREC" resources="2" quantity="13" unitPrice="1700"
+                  unitOfMeasure="WK" netAmount="44200" socialCharges="13260"
+                  grossAmount="57460"/>
+          <Detail type="PUR" description="Sound equipment rental"
+                  phase="SHOOT" quantity="13" unitPrice="900" unitOfMeasure="WK"
+                  netAmount="11700" vatRate="STD"/>
+        </Item>
+      </Account>
+    </Chapter>
+
+    <!-- ===================== TRAVEL AND LIVING ===================== -->
+    <Chapter code="3000" name="Travel and living">
+      <GroupRef group="TRAVEL"/>
+      <Account code="3001" name="Locations" externalCode="030.001">
+        <Item ref="T001" name="Location fees" department="LOC" producer="NWP">
+          <Detail type="PUR" description="Location fees and permits"
+                  phase="SHOOT" quantity="1" unitPrice="90000" unitOfMeasure="FLAT"
+                  netAmount="90000" vatRate="STD"/>
+        </Item>
+        <Item ref="T002" name="Travel and accommodation" department="PROD" producer="NWP">
+          <Detail type="PUR" description="Crew travel, hotels, per diems"
+                  phase="SHOOT" quantity="1" unitPrice="140000" unitOfMeasure="FLAT"
+                  netAmount="140000" vatRate="RED"/>
+        </Item>
+      </Account>
+    </Chapter>
+
+    <!-- ===================== POST-PRODUCTION ===================== -->
+    <Chapter code="4000" name="Post-production">
+      <GroupRef group="POST"/>
+      <GroupRef group="FUND"/>
+      <Account code="4001" name="Editing" externalCode="040.001">
+        <Item ref="P001" name="Editorial" department="EDIT" producer="NWP">
+          <Detail type="FEE" description="Editors, 8 episodes"
+                  phase="POST" role="EDIT" resources="2" quantity="13" unitPrice="2200"
+                  unitOfMeasure="WK" netAmount="57200" socialCharges="17160"
+                  grossAmount="74360"/>
+          <Detail type="PUR" description="Edit suites rental"
+                  phase="POST" quantity="13" unitPrice="1500" unitOfMeasure="WK"
+                  netAmount="19500" vatRate="STD"/>
+        </Item>
+      </Account>
+      <Account code="4002" name="Sound post" externalCode="040.002">
+        <Item ref="P002" name="Sound post" department="SND" producer="SCP">
+          <Detail type="PUR" description="Sound mix and design, 8 episodes"
+                  phase="POST" quantity="8" unitPrice="9000" unitOfMeasure="ITEM"
+                  netAmount="72000" vatRate="STD"/>
+        </Item>
+      </Account>
+      <Account code="4003" name="Visual effects and grading" externalCode="040.003">
+        <Item ref="P003" name="VFX and color" department="EDIT" producer="SCP">
+          <Detail type="PUR" description="VFX shots and color grading"
+                  phase="POST" quantity="1" unitPrice="160000" unitOfMeasure="FLAT"
+                  netAmount="160000" vatRate="STD"/>
+        </Item>
+      </Account>
+      <Account code="4004" name="Music" externalCode="040.004">
+        <Item ref="P004" name="Original score" department="EDIT" producer="NWP">
+          <Detail type="FEE" description="Composer and recording"
+                  phase="POST" quantity="1" unitPrice="70000" unitOfMeasure="FLAT"
+                  netAmount="70000" vatRate="ZERO" withholdingRate="W20"/>
+        </Item>
+      </Account>
+    </Chapter>
+
+    <!-- ===================== FEE AND CONTINGENCY ===================== -->
+    <Chapter code="3800" name="Producer fee and overhead">
+      <GroupRef group="FEE"/>
+      <Account code="3801" name="Producer fee" externalCode="038.001">
+        <Item ref="F001" name="Producer fee" department="PROD" producer="NWP">
+          <Detail type="FEE" description="Producer fee, 7.5%"
+                  phase="DEV" quantity="1" unitPrice="195000" unitOfMeasure="FLAT"
+                  netAmount="195000" vatRate="ZERO"/>
+        </Item>
+      </Account>
+    </Chapter>
+
+    <Chapter code="3900" name="Contingency">
+      <GroupRef group="FEE"/>
+      <Account code="3901" name="General contingency" externalCode="039.001">
+        <Item ref="C001" name="Contingency reserve" producer="NWP">
+          <Detail type="RIS" description="Contingency, 5% of below-the-line"
+                  netAmount="130000"/>
+        </Item>
+      </Account>
+    </Chapter>
+
+  </Body>
+</Budget>

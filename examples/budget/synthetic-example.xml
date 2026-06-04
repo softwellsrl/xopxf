@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Synthetic profile: Chapter > Account > Detail (no Item level).
+     This is analytic-example.xml degraded by dropping the Item level: each
+     account's details are summed per detail type. The overall total is identical
+     (2,819,200 net), proving synthetic is a faithful aggregation of analytic.
+     All names are fictitious. -->
+<Budget xmlns="urn:xopxf:budget:1.0"
+        version="1.0" profile="synthetic" language="en">
+
+  <Header>
+    <Transmission>
+      <Sender>
+        <Name>Northwind Pictures Ltd</Name>
+        <VatId>GB000000000</VatId>
+      </Sender>
+      <Recipient>
+        <Name>Acme Broadcasting Group</Name>
+      </Recipient>
+      <DocumentId>NWP-LONGWINTER-BDG-003-S</DocumentId>
+      <IssueDate>2026-05-20</IssueDate>
+    </Transmission>
+
+    <Production>
+      <Code>LONGWINTER</Code>
+      <Title>The Long Winter</Title>
+      <Episodes>8</Episodes>
+      <Producer>Northwind Pictures Ltd</Producer>
+      <StartDate>2026-09-01</StartDate>
+      <EndDate>2027-05-31</EndDate>
+      <Currency>EUR</Currency>
+    </Production>
+
+    <Revision number="003" status="confirmed" date="2026-05-20"
+              description="Approved revision, pre-shoot (synthetic)"/>
+
+    <Groups>
+      <Group scheme="line" code="ATL"    name="Above the line"/>
+      <Group scheme="line" code="BTL"    name="Below the line"/>
+      <Group scheme="line" code="POST"   name="Post-production"/>
+      <Group scheme="line" code="TRAVEL" name="Travel and living"/>
+      <Group scheme="line" code="FEE"    name="Producer fee and overhead"/>
+      <Group scheme="financier" code="BCAST" name="Broadcaster share"/>
+      <Group scheme="financier" code="FUND"  name="Public fund / tax credit"/>
+    </Groups>
+
+    <DetailTypes>
+      <DetailType code="PUR" name="Purchase / rental"/>
+      <DetailType code="FEE" name="Fee / compensation"/>
+      <DetailType code="RIS" name="Contingency" contingency="true"/>
+    </DetailTypes>
+
+    <VatRates>
+      <VatRate code="STD"  name="Standard rate 22%" rate="22.00"/>
+      <VatRate code="RED"  name="Reduced rate 10%"  rate="10.00"/>
+      <VatRate code="ZERO" name="Zero rated"        rate="0.00"/>
+    </VatRates>
+  </Header>
+
+  <Body>
+
+    <Chapter code="1100" name="Story and rights">
+      <GroupRef group="ATL"/>
+      <GroupRef group="FUND"/>
+      <Account code="1101" name="Rights acquisition" externalCode="011.001">
+        <Detail type="PUR" description="Rights acquisition" netAmount="80000" vatRate="ZERO"/>
+      </Account>
+      <Account code="1102" name="Writing" externalCode="011.002">
+        <Detail type="FEE" description="Writers (head + staff)" netAmount="156000" vatRate="ZERO"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="1200" name="Direction">
+      <GroupRef group="ATL"/>
+      <Account code="1201" name="Director" externalCode="012.001">
+        <Detail type="FEE" description="Series director" netAmount="120000" vatRate="ZERO"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="1300" name="Principal cast">
+      <GroupRef group="ATL"/>
+      <Account code="1301" name="Lead cast" externalCode="013.001">
+        <Detail type="FEE" description="Lead and co-lead" netAmount="325000" vatRate="ZERO"/>
+      </Account>
+      <Account code="1302" name="Supporting cast" externalCode="013.002">
+        <Detail type="FEE" description="Supporting cast" netAmount="120000" vatRate="ZERO"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="2000" name="Production unit">
+      <GroupRef group="BTL"/>
+      <GroupRef group="BCAST"/>
+      <Account code="2001" name="Production staff" externalCode="020.001">
+        <Detail type="FEE" description="Production staff (fees)"
+                netAmount="184400" socialCharges="55320" grossAmount="239720"/>
+        <Detail type="PUR" description="Production office" netAmount="21000" vatRate="STD"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="2400" name="Camera and lighting">
+      <GroupRef group="BTL"/>
+      <GroupRef group="BCAST"/>
+      <Account code="2401" name="Camera crew" externalCode="024.001">
+        <Detail type="FEE" description="Camera crew"
+                netAmount="152100" socialCharges="45630" grossAmount="197730"/>
+      </Account>
+      <Account code="2402" name="Camera equipment" externalCode="024.002">
+        <Detail type="PUR" description="Camera package rental" netAmount="78000" vatRate="STD"/>
+      </Account>
+      <Account code="2403" name="Lighting" externalCode="024.003">
+        <Detail type="FEE" description="Lighting crew"
+                netAmount="62400" socialCharges="18720" grossAmount="81120"/>
+        <Detail type="PUR" description="Lighting and grip rental" netAmount="45500" vatRate="STD"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="2700" name="Art department">
+      <GroupRef group="BTL"/>
+      <Account code="2701" name="Art crew" externalCode="027.001">
+        <Detail type="FEE" description="Art crew"
+                netAmount="120000" socialCharges="36000" grossAmount="156000"/>
+      </Account>
+      <Account code="2702" name="Sets and construction" externalCode="027.002">
+        <Detail type="PUR" description="Construction, dressing and props" netAmount="240000" vatRate="STD"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="2800" name="Costume and make-up">
+      <GroupRef group="BTL"/>
+      <Account code="2801" name="Costume" externalCode="028.001">
+        <Detail type="FEE" description="Costume crew"
+                netAmount="70200" socialCharges="21060" grossAmount="91260"/>
+        <Detail type="PUR" description="Costumes" netAmount="55000" vatRate="STD"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="2600" name="Sound">
+      <GroupRef group="BTL"/>
+      <Account code="2601" name="Production sound" externalCode="026.001">
+        <Detail type="FEE" description="Sound crew"
+                netAmount="44200" socialCharges="13260" grossAmount="57460"/>
+        <Detail type="PUR" description="Sound equipment rental" netAmount="11700" vatRate="STD"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="3000" name="Travel and living">
+      <GroupRef group="TRAVEL"/>
+      <Account code="3001" name="Locations" externalCode="030.001">
+        <Detail type="PUR" description="Location fees and permits" netAmount="90000" vatRate="STD"/>
+        <Detail type="PUR" description="Travel, hotels, per diems" netAmount="140000" vatRate="RED"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="4000" name="Post-production">
+      <GroupRef group="POST"/>
+      <GroupRef group="FUND"/>
+      <Account code="4001" name="Editing" externalCode="040.001">
+        <Detail type="FEE" description="Editorial"
+                netAmount="57200" socialCharges="17160" grossAmount="74360"/>
+        <Detail type="PUR" description="Edit suites rental" netAmount="19500" vatRate="STD"/>
+      </Account>
+      <Account code="4002" name="Sound post" externalCode="040.002">
+        <Detail type="PUR" description="Sound mix and design" netAmount="72000" vatRate="STD"/>
+      </Account>
+      <Account code="4003" name="Visual effects and grading" externalCode="040.003">
+        <Detail type="PUR" description="VFX and color grading" netAmount="160000" vatRate="STD"/>
+      </Account>
+      <Account code="4004" name="Music" externalCode="040.004">
+        <Detail type="FEE" description="Original score" netAmount="70000" vatRate="ZERO"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="3800" name="Producer fee and overhead">
+      <GroupRef group="FEE"/>
+      <Account code="3801" name="Producer fee" externalCode="038.001">
+        <Detail type="FEE" description="Producer fee" netAmount="195000" vatRate="ZERO"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="3900" name="Contingency">
+      <GroupRef group="FEE"/>
+      <Account code="3901" name="General contingency" externalCode="039.001">
+        <Detail type="RIS" description="Contingency" netAmount="130000"/>
+      </Account>
+    </Chapter>
+
+  </Body>
+</Budget>

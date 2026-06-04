@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Production Budget Interchange Format
+  ===================================
+  Draft standard for exchanging film/TV production budgets between a producer
+  (the document issuer) and a commissioning party / co-producer (the recipient).
+
+  Design principles
+  =================
+  1. Self-contained: every code referenced in <Body> is declared in <Header>.
+     No external lookup tables, no shared database required. The document
+     carries its own vocabulary, frozen with the budget revision it describes.
+  2. No national taxonomy hard-wired: there are no Italian/ANICA/Sky codes baked
+     into the schema. Cost classifications, detail types, tax rates etc. are
+     declared in <Header> with free codes chosen by the issuer.
+  3. Two profiles, one schema: the document is "synthetic" (Chapter > Account >
+     Detail) or "analytic" (Chapter > Account > Item > Detail). The only
+     structural difference is the optional <Item> level. An analytic budget
+     degrades to synthetic by summing details — same Detail type in both.
+  4. Versioned and immutable: a budget travels as a confirmed Revision. The Cost
+     Report standard references a budget by (production, revision number).
+
+  Naming note: domain terms are English. The following are PROVISIONAL and may
+  be revised: Item (budget line), Role (job/mansione), Contingency (reserve).
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="urn:xopxf:budget:1.0"
+           targetNamespace="urn:xopxf:budget:1.0"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           version="1.0">
+
+  <!-- ============================================================= -->
+  <!--  ROOT                                                          -->
+  <!-- ============================================================= -->
+  <xs:element name="Budget">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Header" type="HeaderType"/>
+        <xs:element name="Body"   type="BodyType"/>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="required"/>
+      <!-- declared profile of the body; the schema accepts both forms,
+           this states the issuer's intent and lets the reader know what to expect -->
+      <xs:attribute name="profile" type="ProfileType" use="required"/>
+      <!-- ISO 639-1 language of the human-readable data (descriptions, names) -->
+      <xs:attribute name="language" type="xs:language" use="optional"/>
+    </xs:complexType>
+
+    <!-- ===================== Referential integrity ===================== -->
+    <!-- Every reference in the Body must point to something declared in the Header. -->
+
+    <xs:key name="phaseKey">
+      <xs:selector xpath="Header/Phases/Phase"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="departmentKey">
+      <xs:selector xpath="Header/Departments/Department"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="producerKey">
+      <xs:selector xpath="Header/Producers/Producer"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="roleKey">
+      <xs:selector xpath="Header/Roles/Role"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="uomKey">
+      <xs:selector xpath="Header/UnitsOfMeasure/UnitOfMeasure"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="vatKey">
+      <xs:selector xpath="Header/VatRates/VatRate"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="withholdingKey">
+      <xs:selector xpath="Header/WithholdingRates/WithholdingRate"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="detailTypeKey">
+      <xs:selector xpath="Header/DetailTypes/DetailType"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="groupKey">
+      <xs:selector xpath="Header/Groups/Group"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+
+    <!-- Body references resolved against the Header keys above -->
+    <xs:keyref name="groupRef" refer="groupKey">
+      <xs:selector xpath="Body/Chapter/GroupRef"/>
+      <xs:field xpath="@group"/>
+    </xs:keyref>
+    <xs:keyref name="detailTypeRef" refer="detailTypeKey">
+      <xs:selector xpath=".//Detail"/>
+      <xs:field xpath="@type"/>
+    </xs:keyref>
+    <xs:keyref name="detailPhaseRef" refer="phaseKey">
+      <xs:selector xpath=".//Detail"/>
+      <xs:field xpath="@phase"/>
+    </xs:keyref>
+    <xs:keyref name="detailRoleRef" refer="roleKey">
+      <xs:selector xpath=".//Detail"/>
+      <xs:field xpath="@role"/>
+    </xs:keyref>
+    <xs:keyref name="detailUomRef" refer="uomKey">
+      <xs:selector xpath=".//Detail"/>
+      <xs:field xpath="@unitOfMeasure"/>
+    </xs:keyref>
+    <xs:keyref name="detailVatRef" refer="vatKey">
+      <xs:selector xpath=".//Detail"/>
+      <xs:field xpath="@vatRate"/>
+    </xs:keyref>
+    <xs:keyref name="detailWithholdingRef" refer="withholdingKey">
+      <xs:selector xpath=".//Detail"/>
+      <xs:field xpath="@withholdingRate"/>
+    </xs:keyref>
+    <xs:keyref name="itemDepartmentRef" refer="departmentKey">
+      <xs:selector xpath=".//Item"/>
+      <xs:field xpath="@department"/>
+    </xs:keyref>
+    <xs:keyref name="itemProducerRef" refer="producerKey">
+      <xs:selector xpath=".//Item"/>
+      <xs:field xpath="@producer"/>
+    </xs:keyref>
+  </xs:element>
+
+  <!-- ============================================================= -->
+  <!--  HEADER  (document metadata + self-contained vocabularies)     -->
+  <!-- ============================================================= -->
+  <xs:complexType name="HeaderType">
+    <xs:sequence>
+      <!-- ==== document metadata ==== -->
+      <xs:element name="Transmission" type="TransmissionType"/>
+      <xs:element name="Production"   type="ProductionType"/>
+      <xs:element name="Revision"     type="RevisionType"/>
+
+      <!-- ==== vocabularies: the subset valid for THIS revision ====
+           All optional containers: a minimal synthetic budget may use few of them. -->
+      <xs:element name="Groups"           type="GroupListType"        minOccurs="0"/>
+      <xs:element name="Phases"           type="PhaseListType"        minOccurs="0"/>
+      <xs:element name="Departments"      type="DepartmentListType"   minOccurs="0"/>
+      <xs:element name="Producers"        type="ProducerListType"     minOccurs="0"/>
+      <xs:element name="Roles"            type="RoleListType"         minOccurs="0"/>
+      <xs:element name="UnitsOfMeasure"   type="UomListType"          minOccurs="0"/>
+      <xs:element name="DetailTypes"      type="DetailTypeListType"   minOccurs="0"/>
+      <xs:element name="VatRates"         type="VatRateListType"      minOccurs="0"/>
+      <xs:element name="WithholdingRates" type="WithholdingListType"  minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TransmissionType">
+    <xs:sequence>
+      <xs:element name="Sender"     type="PartyType"/>
+      <xs:element name="Recipient"  type="PartyType" minOccurs="0"/>
+      <xs:element name="DocumentId" type="xs:string"/>
+      <xs:element name="IssueDate"  type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PartyType">
+    <xs:sequence>
+      <xs:element name="Name"   type="xs:string"/>
+      <xs:element name="VatId"  type="xs:string" minOccurs="0"/>
+      <xs:element name="Email"  type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="ProductionType">
+    <xs:sequence>
+      <xs:element name="Code"      type="xs:string"/>
+      <xs:element name="Title"     type="xs:string"/>
+      <xs:element name="Episodes"  type="xs:integer" minOccurs="0"/>
+      <xs:element name="Producer"  type="xs:string"  minOccurs="0"/>
+      <xs:element name="StartDate" type="xs:date"    minOccurs="0"/>
+      <xs:element name="EndDate"   type="xs:date"    minOccurs="0"/>
+      <xs:element name="Currency"  type="xs:string"  minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- The referenceable identity: a confirmed revision is immutable.
+       The Cost Report standard points here via (production code, revision number). -->
+  <xs:complexType name="RevisionType">
+    <xs:attribute name="number"      type="xs:string"     use="required"/>
+    <xs:attribute name="status"      type="RevisionStatus" use="required"/>
+    <xs:attribute name="date"        type="xs:date"        use="optional"/>
+    <xs:attribute name="closingDate" type="xs:date"        use="optional"/>
+    <xs:attribute name="description" type="xs:string"      use="optional"/>
+  </xs:complexType>
+
+  <!-- ============================================================= -->
+  <!--  HEADER vocabularies                                           -->
+  <!-- ============================================================= -->
+
+  <!-- Group: a generic axis along which chapters can be grouped.
+       The 'scheme' tells what KIND of grouping (e.g. line, financier, phase).
+       Today a single scheme (e.g. above/below-the-line) is used; more can be
+       added later without changing the format. -->
+  <xs:complexType name="GroupListType">
+    <xs:sequence>
+      <xs:element name="Group" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code"   type="xs:string" use="required"/>
+          <xs:attribute name="name"   type="xs:string" use="required"/>
+          <xs:attribute name="scheme" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PhaseListType">
+    <xs:sequence>
+      <xs:element name="Phase" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code"      type="xs:string" use="required"/>
+          <xs:attribute name="name"      type="xs:string" use="required"/>
+          <xs:attribute name="startDate" type="xs:date"   use="optional"/>
+          <xs:attribute name="endDate"   type="xs:date"   use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DepartmentListType">
+    <xs:sequence>
+      <xs:element name="Department" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code" type="xs:string" use="required"/>
+          <xs:attribute name="name" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ProducerListType">
+    <xs:sequence>
+      <xs:element name="Producer" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code"  type="xs:string" use="required"/>
+          <xs:attribute name="name"  type="xs:string" use="required"/>
+          <xs:attribute name="vatId" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RoleListType">
+    <xs:sequence>
+      <xs:element name="Role" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code" type="xs:string" use="required"/>
+          <xs:attribute name="name" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="UomListType">
+    <xs:sequence>
+      <xs:element name="UnitOfMeasure" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code" type="xs:string" use="required"/>
+          <xs:attribute name="name" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- DetailType: nature of a budget detail line (e.g. purchases, fees,
+       contingency). Codes are free; meaning is given by the declared name.
+       No fixed enumeration: the issuer declares the subset it uses. -->
+  <xs:complexType name="DetailTypeListType">
+    <xs:sequence>
+      <xs:element name="DetailType" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code" type="xs:string" use="required"/>
+          <xs:attribute name="name" type="xs:string" use="required"/>
+          <!-- marks the line as a reserve/contingency, excluded from committed cost -->
+          <xs:attribute name="contingency" type="xs:boolean" use="optional" default="false"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="VatRateListType">
+    <xs:sequence>
+      <xs:element name="VatRate" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code" type="xs:string"  use="required"/>
+          <xs:attribute name="name" type="xs:string"  use="optional"/>
+          <xs:attribute name="rate" type="xs:decimal" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="WithholdingListType">
+    <xs:sequence>
+      <xs:element name="WithholdingRate" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code" type="xs:string"  use="required"/>
+          <xs:attribute name="name" type="xs:string"  use="optional"/>
+          <xs:attribute name="rate" type="xs:decimal" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================= -->
+  <!--  BODY  (chapters > accounts > [items] > details)               -->
+  <!-- ============================================================= -->
+  <xs:complexType name="BodyType">
+    <xs:sequence>
+      <xs:element name="Chapter" type="ChapterType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChapterType">
+    <xs:sequence>
+      <!-- zero or more grouping memberships (multi-axis, e.g. line + financier) -->
+      <xs:element name="GroupRef" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="group" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Account" type="AccountType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="code" type="xs:string" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- The single point where the two profiles differ:
+       synthetic = Detail directly under Account
+       analytic  = Item (department/producer) under Account, Detail under Item -->
+  <xs:complexType name="AccountType">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="Detail" type="DetailType_" maxOccurs="unbounded"/>
+        <xs:element name="Item"   type="ItemType"    maxOccurs="unbounded"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="code" type="xs:string" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <!-- optional external/alternate coding (e.g. accounting system mapping) -->
+    <xs:attribute name="externalCode" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="ItemType">
+    <xs:sequence>
+      <xs:element name="Detail" type="DetailType_" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="ref"        type="xs:string" use="optional"/>
+    <xs:attribute name="name"       type="xs:string" use="optional"/>
+    <xs:attribute name="department" type="xs:string" use="optional"/>
+    <xs:attribute name="producer"   type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <!-- A budget detail line. Amounts are the actual figures; rates/types are
+       references into the Header vocabularies. -->
+  <xs:complexType name="DetailType_">
+    <xs:attribute name="type"           type="xs:string"  use="required"/>
+    <xs:attribute name="description"    type="xs:string"  use="optional"/>
+    <xs:attribute name="phase"          type="xs:string"  use="optional"/>
+    <xs:attribute name="role"           type="xs:string"  use="optional"/>
+    <xs:attribute name="resources"      type="xs:decimal" use="optional"/>
+    <xs:attribute name="quantity"       type="xs:decimal" use="optional"/>
+    <xs:attribute name="unitPrice"      type="xs:decimal" use="optional"/>
+    <xs:attribute name="unitOfMeasure"  type="xs:string"  use="optional"/>
+    <xs:attribute name="netAmount"      type="xs:decimal" use="required"/>
+    <xs:attribute name="socialCharges"  type="xs:decimal" use="optional"/>
+    <xs:attribute name="grossAmount"    type="xs:decimal" use="optional"/>
+    <xs:attribute name="vatRate"        type="xs:string"  use="optional"/>
+    <xs:attribute name="withholdingRate" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <!-- ============================================================= -->
+  <!--  Simple types                                                  -->
+  <!-- ============================================================= -->
+  <xs:simpleType name="ProfileType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="synthetic"/>
+      <xs:enumeration value="analytic"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="RevisionStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="draft"/>
+      <xs:enumeration value="confirmed"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
