@@ -11,3 +11,6 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+
+# Transient working files (handoffs, scratch) — never published
+temp/

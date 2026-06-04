@@ -1,5 +1,8 @@
 {
   "_lang": "fr",
+  "num_decimal": ",",
+  "num_grouping": " ",
+  "num_pattern": "# ##0,00",
   "doc_title_budget": "Budget",
   "subtitle_budget": "Budget de production",
   "episodes": "épisodes",
@@ -13,7 +16,6 @@
   "col_charges": "Charges",
   "col_gross": "Brut",
   "total_budget": "TOTAL BUDGET",
-
   "hdr_title": "En-tête",
   "hdr_subtitle": "En-tête du document et dictionnaire de données",
   "sec_document": "Document",
@@ -48,7 +50,6 @@
   "c_rate": "Taux %",
   "none_declared": "aucun déclaré",
   "yes": "oui",
-
   "doc_title_cr": "Rapport de coûts",
   "subtitle_cr": "Rapport de coûts au",
   "lbl_production": "Production",
@@ -65,5 +66,17 @@
   "col_variance": "Écart",
   "col_esttocomplete": "Reste à engager",
   "col_movement": "Mouvement",
-  "total": "TOTAL"
+  "total": "TOTAL",
+  "doc_title_det": "Détails",
+  "subtitle_det": "Mouvements analytiques justifiant le rapport de coûts",
+  "det_lbl_costreport": "Rapport de coûts",
+  "det_col_tree": "Chapitre / Compte / Mouvement",
+  "det_col_date": "Date",
+  "det_col_payee": "Contrepartie",
+  "det_col_desc": "Description",
+  "det_col_spent": "Dépensé",
+  "det_col_ordered": "Commandé",
+  "det_document": "document",
+  "det_payroll": "paie",
+  "det_minimized_note": "Répertoire des contreparties omis : seuls les codes sont affichés (minimisation des données)."
 }

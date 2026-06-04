@@ -1,5 +1,8 @@
 {
   "_lang": "zh",
+  "num_decimal": ".",
+  "num_grouping": ",",
+  "num_pattern": "#,##0.00",
   "doc_title_budget": "预算",
   "subtitle_budget": "制作预算",
   "episodes": "集",
@@ -13,7 +16,6 @@
   "col_charges": "费用",
   "col_gross": "总额",
   "total_budget": "预算合计",
-
   "hdr_title": "文件头",
   "hdr_subtitle": "文件头与数据字典",
   "sec_document": "文件",
@@ -48,7 +50,6 @@
   "c_rate": "税率 %",
   "none_declared": "未声明",
   "yes": "是",
-
   "doc_title_cr": "成本报告",
   "subtitle_cr": "成本报告截至",
   "lbl_production": "制作",
@@ -65,5 +66,17 @@
   "col_variance": "差异",
   "col_esttocomplete": "完工尚需",
   "col_movement": "变动",
-  "total": "合计"
+  "total": "合计",
+  "doc_title_det": "明细",
+  "subtitle_det": "成本报告背后的分析性流水",
+  "det_lbl_costreport": "成本报告",
+  "det_col_tree": "章 / 科目 / 流水",
+  "det_col_date": "日期",
+  "det_col_payee": "对方",
+  "det_col_desc": "说明",
+  "det_col_spent": "已花费",
+  "det_col_ordered": "已订购",
+  "det_document": "文档",
+  "det_payroll": "工资",
+  "det_minimized_note": "已省略对方名录：仅显示代码（数据最小化）。"
 }

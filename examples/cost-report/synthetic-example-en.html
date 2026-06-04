@@ -1,0 +1,192 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cost Report – The Long Winter</title>
+<style>
+          body { font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+                 color: #222; margin: 24px; font-size: 13px; }
+          h1 { font-size: 20px; margin: 0 0 2px; }
+          .sub { color: #666; margin-bottom: 16px; }
+          .meta { display: flex; flex-wrap: wrap; gap: 22px;
+                  background: #f6f8fa; border: 1px solid #e1e4e8;
+                  border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; }
+          .meta .lbl { color: #888; font-size: 11px; text-transform: uppercase; display:block; }
+          .meta .val { font-weight: 600; }
+          table { border-collapse: collapse; width: 100%; }
+          th { background: #2c3e50; color: #fff; text-align: right; padding: 6px 8px; font-size: 11px; }
+          th.l { text-align: left; }
+          td { padding: 5px 8px; border-bottom: 1px solid #eee; text-align: right; }
+          td.l { text-align: left; }
+          tr.chapter td { background: #34495e; color: #fff; font-weight: 700; }
+          tr.account td { background: #ecf3f9; font-weight: 600; }
+          tr.line td.l { padding-left: 26px; font-style: italic; color: #16608a; }
+          .code { font-family: ui-monospace, monospace; font-size: 11px;
+                  background: #16a085; color: #fff; padding: 1px 6px; border-radius: 3px; margin-right: 6px; }
+          .tag { font-size: 10px; background: #e8eef3; color: #555; padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
+          .neg { color: #c0392b; font-weight: 600; }
+          .pos { color: #156b2e; }
+          tr.total td { font-weight: 700; border-top: 2px solid #2c3e50; background: #fafafa; }
+        </style>
+</head>
+<body>
+<h1>The Long Winter</h1>
+<div class="sub">Cost report as of 2026-12-20</div>
+<div class="meta">
+<div>
+<span class="lbl">Production</span><span class="val">LONGWINTER</span>
+</div>
+<div>
+<span class="lbl">Report no.</span><span class="val">012</span>
+</div>
+<div>
+<span class="lbl">As of</span><span class="val">2026-12-20</span>
+</div>
+<div>
+<span class="lbl">Against budget</span><span class="val">rev 003<span class="tag">LONGWINTER</span></span>
+</div>
+<div>
+<span class="lbl">Sender</span><span class="val">Northwind Pictures Ltd</span>
+</div>
+<div>
+<span class="lbl">Recipient</span><span class="val">Acme Broadcasting Group</span>
+</div>
+<div>
+<span class="lbl">Previous</span><span class="val">no. 011</span>
+</div>
+<div>
+<span class="lbl">Currency</span><span class="val">EUR</span>
+</div>
+</div>
+<table>
+<thead><tr>
+<th class="l">Chapter / Account / Line</th>
+<th>Budget</th>
+<th>Spent</th>
+<th>Committed</th>
+<th>Cost to date</th>
+<th>EFC</th>
+<th>Variance</th>
+<th>Est. to complete</th>
+<th>Movement</th>
+</tr></thead>
+<tbody>
+<tr class="chapter">
+<td class="l">
+<span class="code">1300</span>Principal cast<span class="tag">Above the line</span>
+</td>
+<td>325,000.00</td>
+<td>200,000.00</td>
+<td>125,000.00</td>
+<td>325,000.00</td>
+<td>325,000.00</td>
+<td class=""></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="account">
+<td class="l">
+<span class="code">1301</span>Lead cast<span class="tag">013.001</span>
+</td>
+<td>325,000.00</td>
+<td>200,000.00</td>
+<td>125,000.00</td>
+<td>325,000.00</td>
+<td>325,000.00</td>
+<td class=""></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="chapter">
+<td class="l">
+<span class="code">2400</span>Camera and lighting<span class="tag">Below the line</span>
+</td>
+<td>402,350.00</td>
+<td>247,680.00</td>
+<td>160,670.00</td>
+<td>408,350.00</td>
+<td>408,350.00</td>
+<td class="neg">-6,000.00</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="account">
+<td class="l">
+<span class="code">2401</span>Camera crew<span class="tag">024.001</span>
+</td>
+<td>197,730.00</td>
+<td>121,680.00</td>
+<td>76,050.00</td>
+<td>197,730.00</td>
+<td>197,730.00</td>
+<td class=""></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="account">
+<td class="l">
+<span class="code">2402</span>Camera equipment<span class="tag">024.002</span>
+</td>
+<td>78,000.00</td>
+<td>48,000.00</td>
+<td>36,000.00</td>
+<td>84,000.00</td>
+<td>84,000.00</td>
+<td class="neg">-6,000.00</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="account">
+<td class="l">
+<span class="code">2403</span>Lighting<span class="tag">024.003</span>
+</td>
+<td>126,620.00</td>
+<td>78,000.00</td>
+<td>48,620.00</td>
+<td>126,620.00</td>
+<td>126,620.00</td>
+<td class=""></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="chapter">
+<td class="l">
+<span class="code">3900</span>Contingency<span class="tag">Producer fee and overhead</span>
+</td>
+<td>130,000.00</td>
+<td></td>
+<td></td>
+<td></td>
+<td>124,000.00</td>
+<td class="pos">6,000.00</td>
+<td>124,000.00</td>
+<td></td>
+</tr>
+<tr class="account">
+<td class="l">
+<span class="code">3901</span>General contingency<span class="tag">039.001</span>
+</td>
+<td>130,000.00</td>
+<td></td>
+<td></td>
+<td></td>
+<td>124,000.00</td>
+<td class="pos">6,000.00</td>
+<td>124,000.00</td>
+<td></td>
+</tr>
+<tr class="total">
+<td class="l">TOTAL</td>
+<td>857,350.00</td>
+<td>447,680.00</td>
+<td>285,670.00</td>
+<td>733,350.00</td>
+<td>857,350.00</td>
+<td></td>
+<td>124,000.00</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -5,7 +5,7 @@
      illustrative. This is the full (analytic) form; synthetic-example.xml is the
      same budget degraded to Chapter > Account > Detail. -->
 <Budget xmlns="urn:xopxf:budget:1.0"
-        version="1.0" profile="analytic" language="en">
+        version="0.1.0" profile="analytic" language="en">
 
   <Header>
     <Transmission>

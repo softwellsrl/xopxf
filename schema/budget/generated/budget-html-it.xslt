@@ -114,7 +114,7 @@
         </span>
       </div>
       <div>
-        <span class="lbl">Emittente</span>
+        <span class="lbl">Mittente</span>
         <span class="val"><xsl:value-of select="b:Transmission/b:Sender/b:Name"/></span>
       </div>
       <xsl:if test="b:Transmission/b:Recipient">
@@ -124,11 +124,11 @@
         </div>
       </xsl:if>
       <div>
-        <span class="lbl">Documento</span>
+        <span class="lbl">ID documento</span>
         <span class="val"><xsl:value-of select="b:Transmission/b:DocumentId"/></span>
       </div>
       <div>
-        <span class="lbl">Data</span>
+        <span class="lbl">Data emissione</span>
         <span class="val"><xsl:value-of select="b:Transmission/b:IssueDate"/></span>
       </div>
       <xsl:if test="b:Production/b:Currency">
@@ -315,7 +315,9 @@
     </tr>
   </xsl:template>
 
-  <!-- Number formatting: thousands sep '.', decimals ',' (Italian) -->
+  <!-- Number formatting: separators are localized (num_decimal / num_grouping).
+       The pattern uses the canonical role symbols (',' grouping, '.' decimal);
+       decimal-format remaps them to the per-language separators. -->
   <xsl:template name="fmt">
     <xsl:param name="n"/>
     <xsl:if test="$n != '' and $n != 0">

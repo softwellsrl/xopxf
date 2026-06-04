@@ -40,6 +40,7 @@
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns="urn:xopxf:costreport:1.0"
+           xmlns:c="urn:xopxf:costreport:1.0"
            targetNamespace="urn:xopxf:costreport:1.0"
            elementFormDefault="qualified"
            attributeFormDefault="unqualified"
@@ -61,28 +62,28 @@
 
     <!-- ===================== Referential integrity ===================== -->
     <xs:key name="groupKey">
-      <xs:selector xpath="Header/Groups/Group"/>
+      <xs:selector xpath="c:Header/c:Groups/c:Group"/>
       <xs:field xpath="@code"/>
     </xs:key>
     <xs:key name="departmentKey">
-      <xs:selector xpath="Header/Departments/Department"/>
+      <xs:selector xpath="c:Header/c:Departments/c:Department"/>
       <xs:field xpath="@code"/>
     </xs:key>
     <xs:key name="producerKey">
-      <xs:selector xpath="Header/Producers/Producer"/>
+      <xs:selector xpath="c:Header/c:Producers/c:Producer"/>
       <xs:field xpath="@code"/>
     </xs:key>
 
     <xs:keyref name="groupRef" refer="groupKey">
-      <xs:selector xpath="Body/Chapter/GroupRef"/>
+      <xs:selector xpath="c:Body/c:Chapter/c:GroupRef"/>
       <xs:field xpath="@group"/>
     </xs:keyref>
     <xs:keyref name="lineDepartmentRef" refer="departmentKey">
-      <xs:selector xpath=".//Line"/>
+      <xs:selector xpath=".//c:Line"/>
       <xs:field xpath="@department"/>
     </xs:keyref>
     <xs:keyref name="lineProducerRef" refer="producerKey">
-      <xs:selector xpath=".//Line"/>
+      <xs:selector xpath=".//c:Line"/>
       <xs:field xpath="@producer"/>
     </xs:keyref>
   </xs:element>

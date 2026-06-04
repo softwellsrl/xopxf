@@ -1,0 +1,731 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Budget The Long Winter</title>
+<style>
+          body { font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+                 color: #222; margin: 24px; font-size: 13px; }
+          h1 { font-size: 20px; margin: 0 0 2px; }
+          .sub { color: #666; margin-bottom: 16px; }
+          .meta { display: flex; flex-wrap: wrap; gap: 24px;
+                  background: #f6f8fa; border: 1px solid #e1e4e8;
+                  border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; }
+          .meta div span { display: block; }
+          .meta .lbl { color: #888; font-size: 11px; text-transform: uppercase; }
+          .meta .val { font-weight: 600; }
+          .badge { display: inline-block; padding: 2px 8px; border-radius: 4px;
+                   font-size: 11px; font-weight: 600; }
+          .badge.confirmed { background: #d4f7dd; color: #156b2e; }
+          .badge.draft { background: #fff3cd; color: #856404; }
+          .legend { font-size: 11px; color: #555; margin-bottom: 20px; }
+          .legend b { color: #333; }
+          table { border-collapse: collapse; width: 100%; }
+          th { background: #2c3e50; color: #fff; text-align: left;
+               padding: 6px 8px; font-size: 11px; }
+          th.num, td.num { text-align: right; }
+          td { padding: 5px 8px; border-bottom: 1px solid #eee; }
+          tr.chapter td { background: #34495e; color: #fff; font-weight: 700;
+                          font-size: 13px; }
+          tr.account td { background: #ecf3f9; font-weight: 600; }
+          tr.item td { background: #f8fbfd; font-style: italic; color: #16608a;
+                       padding-left: 24px; }
+          tr.detail td.desc { padding-left: 36px; }
+          tr.detail.contingency td { color: #b1610a; }
+          .code { font-family: ui-monospace, monospace; font-size: 11px;
+                  background: #16a085; color: #fff; padding: 1px 6px;
+                  border-radius: 3px; margin-right: 6px; }
+          tr.total td { font-weight: 700; border-top: 2px solid #2c3e50;
+                        background: #fafafa; }
+          .tag { font-size: 10px; background: #e8eef3; color: #555;
+                 padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
+        </style>
+</head>
+<body>
+<h1>The Long Winter</h1>
+<div class="sub">Budget de production · 8 épisodes</div>
+<div class="meta">
+<div>
+<span class="lbl">Production</span><span class="val">LONGWINTER</span>
+</div>
+<div>
+<span class="lbl">Révision</span><span class="val">003 <span class="badge confirmed">confirmed</span></span>
+</div>
+<div>
+<span class="lbl">Émetteur</span><span class="val">Northwind Pictures Ltd</span>
+</div>
+<div>
+<span class="lbl">Destinataire</span><span class="val">Acme Broadcasting Group</span>
+</div>
+<div>
+<span class="lbl">ID du document</span><span class="val">NWP-LONGWINTER-BDG-003</span>
+</div>
+<div>
+<span class="lbl">Date d'émission</span><span class="val">2026-05-20</span>
+</div>
+<div>
+<span class="lbl">Devise</span><span class="val">EUR</span>
+</div>
+</div>
+<div class="legend">
+<b>Groupes: </b>ATL = Above the line (line) · BTL = Below the line (line) · POST = Post-production (line) · TRAVEL = Travel and living (line) · FEE = Producer fee and overhead (line) · BCAST = Broadcaster share (financier) · FUND = Public fund / tax credit (financier)</div>
+<table>
+<thead><tr>
+<th>Chapitre / Compte / Poste / Détail</th>
+<th>Type</th>
+<th>Phase</th>
+<th class="num">Qté</th>
+<th class="num">Prix unit.</th>
+<th class="num">Net</th>
+<th class="num">Charges</th>
+<th class="num">Brut</th>
+</tr></thead>
+<tbody>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">1100</span>Story and rights<span class="tag">Above the line</span><span class="tag">Public fund / tax credit</span>
+</td>
+<td class="num">236 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">1101</span>Rights acquisition<span class="tag">011.001</span>
+</td>
+<td class="num">80 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">A001</span>Underlying rights<span class="tag">Production office</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Option and rights to source novel</td>
+<td>Purchase / rental</td>
+<td>Development</td>
+<td class="num">1</td>
+<td class="num">80 000,00</td>
+<td class="num">80 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">1102</span>Writing<span class="tag">011.002</span>
+</td>
+<td class="num">156 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">A002</span>Screenwriters<span class="tag">Direction</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Head writer, 8 episodes</td>
+<td>Fee / compensation</td>
+<td>Development</td>
+<td class="num">8</td>
+<td class="num">12 000,00</td>
+<td class="num">96 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Staff writers</td>
+<td>Fee / compensation</td>
+<td>Development</td>
+<td class="num">6</td>
+<td class="num">5 000,00</td>
+<td class="num">60 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">1200</span>Direction<span class="tag">Above the line</span>
+</td>
+<td class="num">120 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">1201</span>Director<span class="tag">012.001</span>
+</td>
+<td class="num">120 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">A003</span>Series director<span class="tag">Direction</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Director, prep to delivery</td>
+<td>Fee / compensation</td>
+<td>Principal photography</td>
+<td class="num">20</td>
+<td class="num">6 000,00</td>
+<td class="num">120 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">1300</span>Principal cast<span class="tag">Above the line</span>
+</td>
+<td class="num">445 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">1301</span>Lead cast<span class="tag">013.001</span>
+</td>
+<td class="num">325 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">A004</span>Lead role<span class="tag">Cast</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Lead actor, season</td>
+<td>Fee / compensation</td>
+<td>Principal photography</td>
+<td class="num">13</td>
+<td class="num">15 000,00</td>
+<td class="num">195 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">A005</span>Co-lead role<span class="tag">Cast</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Co-lead actor, season</td>
+<td>Fee / compensation</td>
+<td>Principal photography</td>
+<td class="num">13</td>
+<td class="num">10 000,00</td>
+<td class="num">130 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">1302</span>Supporting cast<span class="tag">013.002</span>
+</td>
+<td class="num">120 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">A006</span>Supporting roles<span class="tag">Cast</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Supporting cast, pooled</td>
+<td>Fee / compensation</td>
+<td>Principal photography</td>
+<td class="num">8</td>
+<td class="num">2 500,00</td>
+<td class="num">120 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">2000</span>Production unit<span class="tag">Below the line</span><span class="tag">Broadcaster share</span>
+</td>
+<td class="num">205 400,00</td>
+<td class="num">55 320,00</td>
+<td class="num">239 720,00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2001</span>Production staff<span class="tag">020.001</span>
+</td>
+<td class="num">205 400,00</td>
+<td class="num">55 320,00</td>
+<td class="num">239 720,00</td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">B001</span>Line producer<span class="tag">Production office</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Line producer</td>
+<td>Fee / compensation</td>
+<td>Pre-production</td>
+<td class="num">28</td>
+<td class="num">3 500,00</td>
+<td class="num">98 000,00</td>
+<td class="num">29 400,00</td>
+<td class="num">127 400,00</td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">B002</span>Production coordination<span class="tag">Production office</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Production coordinator + assistants</td>
+<td>Fee / compensation</td>
+<td>Pre-production</td>
+<td class="num">24</td>
+<td class="num">1 200,00</td>
+<td class="num">86 400,00</td>
+<td class="num">25 920,00</td>
+<td class="num">112 320,00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Production office rental and supplies</td>
+<td>Purchase / rental</td>
+<td>Pre-production</td>
+<td class="num">7</td>
+<td class="num">3 000,00</td>
+<td class="num">21 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">2400</span>Camera and lighting<span class="tag">Below the line</span><span class="tag">Broadcaster share</span>
+</td>
+<td class="num">338 000,00</td>
+<td class="num">64 350,00</td>
+<td class="num">278 850,00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2401</span>Camera crew<span class="tag">024.001</span>
+</td>
+<td class="num">152 100,00</td>
+<td class="num">45 630,00</td>
+<td class="num">197 730,00</td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">B003</span>Director of photography<span class="tag">Camera</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">DOP</td>
+<td>Fee / compensation</td>
+<td>Principal photography</td>
+<td class="num">13</td>
+<td class="num">4 500,00</td>
+<td class="num">58 500,00</td>
+<td class="num">17 550,00</td>
+<td class="num">76 050,00</td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">B004</span>Camera operators<span class="tag">Camera</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Camera operators and assistants</td>
+<td>Fee / compensation</td>
+<td>Principal photography</td>
+<td class="num">13</td>
+<td class="num">1 800,00</td>
+<td class="num">93 600,00</td>
+<td class="num">28 080,00</td>
+<td class="num">121 680,00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2402</span>Camera equipment<span class="tag">024.002</span>
+</td>
+<td class="num">78 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">B005</span>Camera package<span class="tag">Camera</span><span class="tag">Silverpeak Co-Production</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Camera bodies, lenses, accessories rental</td>
+<td>Purchase / rental</td>
+<td>Principal photography</td>
+<td class="num">13</td>
+<td class="num">6 000,00</td>
+<td class="num">78 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2403</span>Lighting<span class="tag">024.003</span>
+</td>
+<td class="num">107 900,00</td>
+<td class="num">18 720,00</td>
+<td class="num">81 120,00</td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">B006</span>Lighting crew<span class="tag">Lighting</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Gaffer and electricians</td>
+<td>Fee / compensation</td>
+<td>Principal photography</td>
+<td class="num">13</td>
+<td class="num">1 600,00</td>
+<td class="num">62 400,00</td>
+<td class="num">18 720,00</td>
+<td class="num">81 120,00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Lighting and grip equipment rental</td>
+<td>Purchase / rental</td>
+<td>Principal photography</td>
+<td class="num">13</td>
+<td class="num">3 500,00</td>
+<td class="num">45 500,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">2700</span>Art department<span class="tag">Below the line</span>
+</td>
+<td class="num">360 000,00</td>
+<td class="num">36 000,00</td>
+<td class="num">156 000,00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2701</span>Art crew<span class="tag">027.001</span>
+</td>
+<td class="num">120 000,00</td>
+<td class="num">36 000,00</td>
+<td class="num">156 000,00</td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">B007</span>Production design<span class="tag">Art department</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Production designer + art crew</td>
+<td>Fee / compensation</td>
+<td>Pre-production</td>
+<td class="num">20</td>
+<td class="num">1 500,00</td>
+<td class="num">120 000,00</td>
+<td class="num">36 000,00</td>
+<td class="num">156 000,00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2702</span>Sets and construction<span class="tag">027.002</span>
+</td>
+<td class="num">240 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">B008</span>Set construction<span class="tag">Art department</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Set construction materials and labour</td>
+<td>Purchase / rental</td>
+<td>Pre-production</td>
+<td class="num">1</td>
+<td class="num">180 000,00</td>
+<td class="num">180 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Set dressing and props</td>
+<td>Purchase / rental</td>
+<td>Principal photography</td>
+<td class="num">1</td>
+<td class="num">60 000,00</td>
+<td class="num">60 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">2800</span>Costume and make-up<span class="tag">Below the line</span>
+</td>
+<td class="num">125 200,00</td>
+<td class="num">21 060,00</td>
+<td class="num">91 260,00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2801</span>Costume<span class="tag">028.001</span>
+</td>
+<td class="num">125 200,00</td>
+<td class="num">21 060,00</td>
+<td class="num">91 260,00</td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">B009</span>Costume<span class="tag">Costume and make-up</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Costume designer and crew</td>
+<td>Fee / compensation</td>
+<td>Pre-production</td>
+<td class="num">18</td>
+<td class="num">1 300,00</td>
+<td class="num">70 200,00</td>
+<td class="num">21 060,00</td>
+<td class="num">91 260,00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Costumes purchase and rental</td>
+<td>Purchase / rental</td>
+<td>Principal photography</td>
+<td class="num">1</td>
+<td class="num">55 000,00</td>
+<td class="num">55 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">2600</span>Sound<span class="tag">Below the line</span>
+</td>
+<td class="num">55 900,00</td>
+<td class="num">13 260,00</td>
+<td class="num">57 460,00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2601</span>Production sound<span class="tag">026.001</span>
+</td>
+<td class="num">55 900,00</td>
+<td class="num">13 260,00</td>
+<td class="num">57 460,00</td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">B010</span>Sound crew<span class="tag">Sound</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Sound recordist and boom operator</td>
+<td>Fee / compensation</td>
+<td>Principal photography</td>
+<td class="num">13</td>
+<td class="num">1 700,00</td>
+<td class="num">44 200,00</td>
+<td class="num">13 260,00</td>
+<td class="num">57 460,00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Sound equipment rental</td>
+<td>Purchase / rental</td>
+<td>Principal photography</td>
+<td class="num">13</td>
+<td class="num">900,00</td>
+<td class="num">11 700,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">3000</span>Travel and living<span class="tag">Travel and living</span>
+</td>
+<td class="num">230 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">3001</span>Locations<span class="tag">030.001</span>
+</td>
+<td class="num">230 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">T001</span>Location fees<span class="tag">Locations</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Location fees and permits</td>
+<td>Purchase / rental</td>
+<td>Principal photography</td>
+<td class="num">1</td>
+<td class="num">90 000,00</td>
+<td class="num">90 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">T002</span>Travel and accommodation<span class="tag">Production office</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Crew travel, hotels, per diems</td>
+<td>Purchase / rental</td>
+<td>Principal photography</td>
+<td class="num">1</td>
+<td class="num">140 000,00</td>
+<td class="num">140 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">4000</span>Post-production<span class="tag">Post-production</span><span class="tag">Public fund / tax credit</span>
+</td>
+<td class="num">378 700,00</td>
+<td class="num">17 160,00</td>
+<td class="num">74 360,00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">4001</span>Editing<span class="tag">040.001</span>
+</td>
+<td class="num">76 700,00</td>
+<td class="num">17 160,00</td>
+<td class="num">74 360,00</td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">P001</span>Editorial<span class="tag">Editing</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Editors, 8 episodes</td>
+<td>Fee / compensation</td>
+<td>Post-production</td>
+<td class="num">13</td>
+<td class="num">2 200,00</td>
+<td class="num">57 200,00</td>
+<td class="num">17 160,00</td>
+<td class="num">74 360,00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Edit suites rental</td>
+<td>Purchase / rental</td>
+<td>Post-production</td>
+<td class="num">13</td>
+<td class="num">1 500,00</td>
+<td class="num">19 500,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">4002</span>Sound post<span class="tag">040.002</span>
+</td>
+<td class="num">72 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">P002</span>Sound post<span class="tag">Sound</span><span class="tag">Silverpeak Co-Production</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Sound mix and design, 8 episodes</td>
+<td>Purchase / rental</td>
+<td>Post-production</td>
+<td class="num">8</td>
+<td class="num">9 000,00</td>
+<td class="num">72 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">4003</span>Visual effects and grading<span class="tag">040.003</span>
+</td>
+<td class="num">160 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">P003</span>VFX and color<span class="tag">Editing</span><span class="tag">Silverpeak Co-Production</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">VFX shots and color grading</td>
+<td>Purchase / rental</td>
+<td>Post-production</td>
+<td class="num">1</td>
+<td class="num">160 000,00</td>
+<td class="num">160 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">4004</span>Music<span class="tag">040.004</span>
+</td>
+<td class="num">70 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">P004</span>Original score<span class="tag">Editing</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Composer and recording</td>
+<td>Fee / compensation</td>
+<td>Post-production</td>
+<td class="num">1</td>
+<td class="num">70 000,00</td>
+<td class="num">70 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">3800</span>Producer fee and overhead<span class="tag">Producer fee and overhead</span>
+</td>
+<td class="num">195 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">3801</span>Producer fee<span class="tag">038.001</span>
+</td>
+<td class="num">195 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">F001</span>Producer fee<span class="tag">Production office</span><span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail">
+<td class="desc">Producer fee, 7.5%</td>
+<td>Fee / compensation</td>
+<td>Development</td>
+<td class="num">1</td>
+<td class="num">195 000,00</td>
+<td class="num">195 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">3900</span>Contingency<span class="tag">Producer fee and overhead</span>
+</td>
+<td class="num">130 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">3901</span>General contingency<span class="tag">039.001</span>
+</td>
+<td class="num">130 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="item"><td colspan="8">
+<span class="code">C001</span>Contingency reserve<span class="tag">Northwind Pictures Ltd</span>
+</td></tr>
+<tr class="detail contingency">
+<td class="desc">Contingency, 5% of below-the-line</td>
+<td>Contingency</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">130 000,00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="total">
+<td colspan="5">TOTAL BUDGET</td>
+<td class="num">2 819 200,00</td>
+<td class="num">207 150,00</td>
+<td class="num">897 650,00</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

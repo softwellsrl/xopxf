@@ -1,0 +1,53 @@
+site_name: XOPXF — eXtended Open Production eXchange Format
+site_description: >-
+  An open, validatable interchange format for film/TV production financial
+  documents (budgets, cost reports and their underlying detail), exchanged
+  between producers and commissioning parties.
+# For now the canonical home is the repository. When Read the Docs is enabled,
+# change site_url to the published docs URL (e.g. https://xopxf.readthedocs.io/).
+site_url: https://github.com/softwellsrl/xopxf
+repo_url: https://github.com/softwellsrl/xopxf
+repo_name: softwellsrl/xopxf
+copyright: >-
+  Documentation © Softwell S.r.l., licensed CC-BY-4.0. Schemas and examples
+  licensed Apache-2.0.
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: blue grey
+      accent: teal
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue grey
+      accent: teal
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - toc.integrate
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - Specification: specification.md
+  - Documents:
+      - Budget: documents/budget.md
+      - Cost Report: documents/cost-report.md
+      - Details: documents/details.md
+  - Localization: localization.md
+  - Validating & rendering: validating.md
+  - FAQ: faq.md

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Details, full form: Header WITH the Parties registry, so counterparty codes
+     resolve to names. These movements justify cost report no. 012 of the
+     fictitious production "The Long Winter", against budget revision 003.
+     Figures are illustrative. All names are fictitious. -->
+<Details xmlns="urn:xopxf:details:1.0" version="0.1.0" language="en">
+
+  <Header>
+    <Transmission>
+      <Sender>
+        <Name>Northwind Pictures Ltd</Name>
+        <VatId>GB000000000</VatId>
+      </Sender>
+      <Recipient>
+        <Name>Acme Broadcasting Group</Name>
+      </Recipient>
+      <DocumentId>NWP-LONGWINTER-DET-012</DocumentId>
+      <IssueDate>2026-12-22</IssueDate>
+    </Transmission>
+
+    <Production>
+      <Code>LONGWINTER</Code>
+      <Title>The Long Winter</Title>
+      <Episodes>8</Episodes>
+      <Currency>EUR</Currency>
+    </Production>
+
+    <BudgetReference productionCode="LONGWINTER" revision="003"
+                     documentId="NWP-LONGWINTER-BDG-003" date="2026-05-20"/>
+    <CostReportReference documentId="NWP-LONGWINTER-CR-012" number="012" asOf="2026-12-20"/>
+
+    <Groups>
+      <Group scheme="line" code="ATL" name="Above the line"/>
+      <Group scheme="line" code="BTL" name="Below the line"/>
+    </Groups>
+
+    <Departments>
+      <Department code="CAST"  name="Cast"/>
+      <Department code="CAM"   name="Camera"/>
+      <Department code="LIGHT" name="Lighting"/>
+    </Departments>
+
+    <Producers>
+      <Producer code="NWP" name="Northwind Pictures Ltd"/>
+      <Producer code="SCP" name="Silverpeak Co-Production"/>
+    </Producers>
+
+    <Roles>
+      <Role code="LEAD" name="Lead actor"/>
+      <Role code="DOP"  name="Director of photography"/>
+      <Role code="CAMOP" name="Camera operator"/>
+      <Role code="GAFFER" name="Gaffer"/>
+    </Roles>
+
+    <MovementTypes>
+      <MovementType code="INV" name="Supplier invoice"/>
+      <MovementType code="PO"  name="Purchase order"/>
+      <MovementType code="PAY" name="Payroll" payroll="true"/>
+      <MovementType code="VAR" name="Variation"/>
+    </MovementTypes>
+
+    <!-- The counterparty registry. Persons carry personName (+ optional role),
+         companies carry legalName + vatId. The body references these by code. -->
+    <Parties>
+      <Party code="P0101" type="person"  personName="Eleanor Vance"  role="LEAD"   city="London"/>
+      <Party code="P0102" type="person"  personName="Marcus Bellini" role="DOP"    city="Rome"/>
+      <Party code="P0103" type="person"  personName="Sofia Kallio"    role="CAMOP"  city="Helsinki"/>
+      <Party code="P0104" type="person"  personName="Tom Aldridge"    role="GAFFER" city="Manchester"/>
+      <Party code="C2001" type="company" legalName="Apex Camera Rental Ltd"  vatId="GB111111111" city="London"/>
+      <Party code="C2002" type="company" legalName="Bright Lighting Hire SpA" vatId="IT22222222222" city="Milan"/>
+    </Parties>
+  </Header>
+
+  <Body>
+
+    <Chapter code="1300" name="Principal cast">
+      <GroupRef group="ATL"/>
+      <Account code="1301" name="Lead cast" externalCode="013.001">
+        <Movement type="PAY" date="2026-11-30" payeeRef="P0101" role="LEAD"
+                  department="CAST" producer="NWP" itemRef="A004"
+                  description="Lead actor fee, November instalment"
+                  spent="60000" net="50000" charges="10000" gross="60000">
+          <Document url="https://docs.example.com/payslips/P0101-2026-11.pdf" type="payslip"/>
+        </Movement>
+        <Movement type="PAY" date="2026-11-30" payeeRef="P0101" role="LEAD"
+                  department="CAST" producer="NWP" itemRef="A004"
+                  documentNumber="ADV-A004-02"
+                  description="Lead actor fee, advance"
+                  spent="60000" net="50000" charges="10000" gross="60000"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="2400" name="Camera and lighting">
+      <GroupRef group="BTL"/>
+      <Account code="2401" name="Camera crew" externalCode="024.001">
+        <Movement type="PAY" date="2026-12-13" payeeRef="P0102" role="DOP"
+                  department="CAM" producer="NWP" itemRef="B003"
+                  description="DoP weekly payroll"
+                  spent="9750" net="7800" charges="1950" gross="9750"/>
+        <Movement type="PAY" date="2026-12-13" payeeRef="P0103" role="CAMOP"
+                  department="CAM" producer="NWP" itemRef="B004"
+                  description="Camera operator weekly payroll"
+                  spent="7200" net="5760" charges="1440" gross="7200"/>
+      </Account>
+      <Account code="2402" name="Camera equipment" externalCode="024.002">
+        <Movement type="INV" date="2026-12-10" payeeRef="C2001"
+                  department="CAM" producer="SCP" itemRef="B005"
+                  documentNumber="APX-2026-4471" documentDate="2026-12-08"
+                  description="Camera package weekly rental"
+                  spent="12000" net="9836" vat="2164" gross="12000">
+          <Document url="https://docs.example.com/invoices/APX-2026-4471.pdf" type="invoice"/>
+        </Movement>
+        <Movement type="PO" date="2026-12-05" payeeRef="C2001"
+                  department="CAM" producer="SCP" itemRef="B005"
+                  documentNumber="PO-2026-0312"
+                  description="Camera package, remaining shoot"
+                  ordered="36000"/>
+      </Account>
+      <Account code="2403" name="Lighting" externalCode="024.003">
+        <Movement type="INV" date="2026-12-11" payeeRef="C2002"
+                  department="LIGHT" producer="NWP" itemRef="B006"
+                  documentNumber="BLH-2026-119" documentDate="2026-12-09"
+                  description="Lighting package rental"
+                  spent="18000" net="14754" vat="3246" gross="18000">
+          <Document url="https://docs.example.com/invoices/BLH-2026-119.pdf" type="invoice"/>
+        </Movement>
+        <Movement type="PAY" date="2026-12-13" payeeRef="P0104" role="GAFFER"
+                  department="LIGHT" producer="NWP" itemRef="B006"
+                  description="Gaffer weekly payroll"
+                  spent="4500" net="3600" charges="900" gross="4500"/>
+      </Account>
+    </Chapter>
+
+  </Body>
+</Details>

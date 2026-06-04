@@ -1,0 +1,233 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Détails – The Long Winter</title>
+<style>
+          body { font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+                 color: #222; margin: 24px; font-size: 13px; }
+          h1 { font-size: 20px; margin: 0 0 2px; }
+          .sub { color: #666; margin-bottom: 16px; }
+          .meta { display: flex; flex-wrap: wrap; gap: 22px;
+                  background: #f6f8fa; border: 1px solid #e1e4e8;
+                  border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; }
+          .meta .lbl { color: #888; font-size: 11px; text-transform: uppercase; display:block; }
+          .meta .val { font-weight: 600; }
+          table { border-collapse: collapse; width: 100%; }
+          th { background: #2c3e50; color: #fff; text-align: right; padding: 6px 8px; font-size: 11px; }
+          th.l { text-align: left; }
+          td { padding: 5px 8px; border-bottom: 1px solid #eee; text-align: right; }
+          td.l { text-align: left; }
+          tr.chapter td { background: #34495e; color: #fff; font-weight: 700; }
+          tr.account td { background: #ecf3f9; font-weight: 600; }
+          tr.movement td.l { padding-left: 26px; }
+          .code { font-family: ui-monospace, monospace; font-size: 11px;
+                  background: #16a085; color: #fff; padding: 1px 6px; border-radius: 3px; margin-right: 6px; }
+          .tag { font-size: 10px; background: #e8eef3; color: #555; padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
+          .payroll { background: #fdecea; color: #b03a2e; }
+          .payee { font-weight: 600; }
+          .payee.code-only { font-family: ui-monospace, monospace; color: #7d3c98; }
+          a.doc { font-size: 11px; color: #2471a3; text-decoration: none; margin-left: 6px; }
+          a.doc:hover { text-decoration: underline; }
+          tr.total td { font-weight: 700; border-top: 2px solid #2c3e50; background: #fafafa; }
+          .note { color: #888; font-size: 11px; margin-top: 10px; }
+        </style>
+</head>
+<body>
+<h1>The Long Winter</h1>
+<div class="sub">Mouvements analytiques justifiant le rapport de coûts</div>
+<div class="meta">
+<div>
+<span class="lbl">Production</span><span class="val">LONGWINTER</span>
+</div>
+<div>
+<span class="lbl">Par rapport au budget</span><span class="val">rev 003</span>
+</div>
+<div>
+<span class="lbl">Rapport de coûts</span><span class="val">no. 012<span class="tag">2026-12-20</span></span>
+</div>
+<div>
+<span class="lbl">ID du document</span><span class="val">NWP-LONGWINTER-DET-012</span>
+</div>
+<div>
+<span class="lbl">Émetteur</span><span class="val">Northwind Pictures Ltd</span>
+</div>
+<div>
+<span class="lbl">Destinataire</span><span class="val">Acme Broadcasting Group</span>
+</div>
+<div>
+<span class="lbl">Devise</span><span class="val">EUR</span>
+</div>
+</div>
+<table>
+<thead><tr>
+<th class="l">Chapitre / Compte / Mouvement</th>
+<th>Date</th>
+<th class="l">Contrepartie</th>
+<th class="l">Description</th>
+<th>Dépensé</th>
+<th>Commandé</th>
+</tr></thead>
+<tbody>
+<tr class="chapter">
+<td class="l">
+<span class="code">1300</span>Principal cast<span class="tag">Above the line</span>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td>120 000,00</td>
+<td></td>
+</tr>
+<tr class="account">
+<td class="l">
+<span class="code">1301</span>Lead cast<span class="tag">013.001</span>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td>120 000,00</td>
+<td></td>
+</tr>
+<tr class="movement">
+<td class="l">
+<span class="tag">Payroll</span><a class="doc" href="https://docs.example.com/payslips/P0101-2026-11.pdf">document</a>
+</td>
+<td>2026-11-30</td>
+<td class="l">
+<span class="payee">Eleanor Vance</span><span class="tag">London</span><span class="tag">Lead actor</span><span class="tag payroll">paie</span>
+</td>
+<td class="l">Lead actor fee, November instalment</td>
+<td>60 000,00</td>
+<td></td>
+</tr>
+<tr class="movement">
+<td class="l">
+<span class="tag">Payroll</span><span class="code">ADV-A004-02</span>
+</td>
+<td>2026-11-30</td>
+<td class="l">
+<span class="payee">Eleanor Vance</span><span class="tag">London</span><span class="tag">Lead actor</span><span class="tag payroll">paie</span>
+</td>
+<td class="l">Lead actor fee, advance</td>
+<td>60 000,00</td>
+<td></td>
+</tr>
+<tr class="chapter">
+<td class="l">
+<span class="code">2400</span>Camera and lighting<span class="tag">Below the line</span>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td>51 450,00</td>
+<td>36 000,00</td>
+</tr>
+<tr class="account">
+<td class="l">
+<span class="code">2401</span>Camera crew<span class="tag">024.001</span>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td>16 950,00</td>
+<td></td>
+</tr>
+<tr class="movement">
+<td class="l"><span class="tag">Payroll</span></td>
+<td>2026-12-13</td>
+<td class="l">
+<span class="payee">Marcus Bellini</span><span class="tag">Rome</span><span class="tag">Director of photography</span><span class="tag payroll">paie</span>
+</td>
+<td class="l">DoP weekly payroll</td>
+<td>9 750,00</td>
+<td></td>
+</tr>
+<tr class="movement">
+<td class="l"><span class="tag">Payroll</span></td>
+<td>2026-12-13</td>
+<td class="l">
+<span class="payee">Sofia Kallio</span><span class="tag">Helsinki</span><span class="tag">Camera operator</span><span class="tag payroll">paie</span>
+</td>
+<td class="l">Camera operator weekly payroll</td>
+<td>7 200,00</td>
+<td></td>
+</tr>
+<tr class="account">
+<td class="l">
+<span class="code">2402</span>Camera equipment<span class="tag">024.002</span>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td>12 000,00</td>
+<td>36 000,00</td>
+</tr>
+<tr class="movement">
+<td class="l">
+<span class="tag">Supplier invoice</span><span class="code">APX-2026-4471</span><a class="doc" href="https://docs.example.com/invoices/APX-2026-4471.pdf">document</a>
+</td>
+<td>2026-12-10</td>
+<td class="l">
+<span class="payee">Apex Camera Rental Ltd</span><span class="tag">London</span>
+</td>
+<td class="l">Camera package weekly rental</td>
+<td>12 000,00</td>
+<td></td>
+</tr>
+<tr class="movement">
+<td class="l">
+<span class="tag">Purchase order</span><span class="code">PO-2026-0312</span>
+</td>
+<td>2026-12-05</td>
+<td class="l">
+<span class="payee">Apex Camera Rental Ltd</span><span class="tag">London</span>
+</td>
+<td class="l">Camera package, remaining shoot</td>
+<td></td>
+<td>36 000,00</td>
+</tr>
+<tr class="account">
+<td class="l">
+<span class="code">2403</span>Lighting<span class="tag">024.003</span>
+</td>
+<td></td>
+<td></td>
+<td></td>
+<td>22 500,00</td>
+<td></td>
+</tr>
+<tr class="movement">
+<td class="l">
+<span class="tag">Supplier invoice</span><span class="code">BLH-2026-119</span><a class="doc" href="https://docs.example.com/invoices/BLH-2026-119.pdf">document</a>
+</td>
+<td>2026-12-11</td>
+<td class="l">
+<span class="payee">Bright Lighting Hire SpA</span><span class="tag">Milan</span>
+</td>
+<td class="l">Lighting package rental</td>
+<td>18 000,00</td>
+<td></td>
+</tr>
+<tr class="movement">
+<td class="l"><span class="tag">Payroll</span></td>
+<td>2026-12-13</td>
+<td class="l">
+<span class="payee">Tom Aldridge</span><span class="tag">Manchester</span><span class="tag">Gaffer</span><span class="tag payroll">paie</span>
+</td>
+<td class="l">Gaffer weekly payroll</td>
+<td>4 500,00</td>
+<td></td>
+</tr>
+<tr class="total">
+<td class="l">TOTAL</td>
+<td></td>
+<td></td>
+<td></td>
+<td>171 450,00</td>
+<td>36 000,00</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

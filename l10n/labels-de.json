@@ -1,5 +1,8 @@
 {
   "_lang": "de",
+  "num_decimal": ",",
+  "num_grouping": ".",
+  "num_pattern": "#.##0,00",
   "doc_title_budget": "Budget",
   "subtitle_budget": "Produktionsbudget",
   "episodes": "Folgen",
@@ -13,7 +16,6 @@
   "col_charges": "Abgaben",
   "col_gross": "Brutto",
   "total_budget": "GESAMTBUDGET",
-
   "hdr_title": "Kopfdaten",
   "hdr_subtitle": "Dokumentkopf und Datenwörterbuch",
   "sec_document": "Dokument",
@@ -48,7 +50,6 @@
   "c_rate": "Satz %",
   "none_declared": "keine angegeben",
   "yes": "ja",
-
   "doc_title_cr": "Kostenbericht",
   "subtitle_cr": "Kostenbericht zum",
   "lbl_production": "Produktion",
@@ -65,5 +66,17 @@
   "col_variance": "Abweichung",
   "col_esttocomplete": "Bis Fertigstellung",
   "col_movement": "Veränderung",
-  "total": "GESAMT"
+  "total": "GESAMT",
+  "doc_title_det": "Einzelnachweise",
+  "subtitle_det": "Analytische Bewegungen zum Kostenbericht",
+  "det_lbl_costreport": "Kostenbericht",
+  "det_col_tree": "Kapitel / Konto / Bewegung",
+  "det_col_date": "Datum",
+  "det_col_payee": "Gegenpartei",
+  "det_col_desc": "Beschreibung",
+  "det_col_spent": "Ausgegeben",
+  "det_col_ordered": "Bestellt",
+  "det_document": "Dokument",
+  "det_payroll": "Lohn",
+  "det_minimized_note": "Gegenpartei-Verzeichnis weggelassen: nur Codes werden angezeigt (Datenminimierung)."
 }

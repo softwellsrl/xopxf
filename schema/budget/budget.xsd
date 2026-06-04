@@ -25,6 +25,7 @@
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns="urn:xopxf:budget:1.0"
+           xmlns:b="urn:xopxf:budget:1.0"
            targetNamespace="urn:xopxf:budget:1.0"
            elementFormDefault="qualified"
            attributeFormDefault="unqualified"
@@ -51,77 +52,77 @@
     <!-- Every reference in the Body must point to something declared in the Header. -->
 
     <xs:key name="phaseKey">
-      <xs:selector xpath="Header/Phases/Phase"/>
+      <xs:selector xpath="b:Header/b:Phases/b:Phase"/>
       <xs:field xpath="@code"/>
     </xs:key>
     <xs:key name="departmentKey">
-      <xs:selector xpath="Header/Departments/Department"/>
+      <xs:selector xpath="b:Header/b:Departments/b:Department"/>
       <xs:field xpath="@code"/>
     </xs:key>
     <xs:key name="producerKey">
-      <xs:selector xpath="Header/Producers/Producer"/>
+      <xs:selector xpath="b:Header/b:Producers/b:Producer"/>
       <xs:field xpath="@code"/>
     </xs:key>
     <xs:key name="roleKey">
-      <xs:selector xpath="Header/Roles/Role"/>
+      <xs:selector xpath="b:Header/b:Roles/b:Role"/>
       <xs:field xpath="@code"/>
     </xs:key>
     <xs:key name="uomKey">
-      <xs:selector xpath="Header/UnitsOfMeasure/UnitOfMeasure"/>
+      <xs:selector xpath="b:Header/b:UnitsOfMeasure/b:UnitOfMeasure"/>
       <xs:field xpath="@code"/>
     </xs:key>
     <xs:key name="vatKey">
-      <xs:selector xpath="Header/VatRates/VatRate"/>
+      <xs:selector xpath="b:Header/b:VatRates/b:VatRate"/>
       <xs:field xpath="@code"/>
     </xs:key>
     <xs:key name="withholdingKey">
-      <xs:selector xpath="Header/WithholdingRates/WithholdingRate"/>
+      <xs:selector xpath="b:Header/b:WithholdingRates/b:WithholdingRate"/>
       <xs:field xpath="@code"/>
     </xs:key>
     <xs:key name="detailTypeKey">
-      <xs:selector xpath="Header/DetailTypes/DetailType"/>
+      <xs:selector xpath="b:Header/b:DetailTypes/b:DetailType"/>
       <xs:field xpath="@code"/>
     </xs:key>
     <xs:key name="groupKey">
-      <xs:selector xpath="Header/Groups/Group"/>
+      <xs:selector xpath="b:Header/b:Groups/b:Group"/>
       <xs:field xpath="@code"/>
     </xs:key>
 
     <!-- Body references resolved against the Header keys above -->
     <xs:keyref name="groupRef" refer="groupKey">
-      <xs:selector xpath="Body/Chapter/GroupRef"/>
+      <xs:selector xpath="b:Body/b:Chapter/b:GroupRef"/>
       <xs:field xpath="@group"/>
     </xs:keyref>
     <xs:keyref name="detailTypeRef" refer="detailTypeKey">
-      <xs:selector xpath=".//Detail"/>
+      <xs:selector xpath=".//b:Detail"/>
       <xs:field xpath="@type"/>
     </xs:keyref>
     <xs:keyref name="detailPhaseRef" refer="phaseKey">
-      <xs:selector xpath=".//Detail"/>
+      <xs:selector xpath=".//b:Detail"/>
       <xs:field xpath="@phase"/>
     </xs:keyref>
     <xs:keyref name="detailRoleRef" refer="roleKey">
-      <xs:selector xpath=".//Detail"/>
+      <xs:selector xpath=".//b:Detail"/>
       <xs:field xpath="@role"/>
     </xs:keyref>
     <xs:keyref name="detailUomRef" refer="uomKey">
-      <xs:selector xpath=".//Detail"/>
+      <xs:selector xpath=".//b:Detail"/>
       <xs:field xpath="@unitOfMeasure"/>
     </xs:keyref>
     <xs:keyref name="detailVatRef" refer="vatKey">
-      <xs:selector xpath=".//Detail"/>
+      <xs:selector xpath=".//b:Detail"/>
       <xs:field xpath="@vatRate"/>
     </xs:keyref>
     <xs:keyref name="detailWithholdingRef" refer="withholdingKey">
-      <xs:selector xpath=".//Detail"/>
+      <xs:selector xpath=".//b:Detail"/>
       <xs:field xpath="@withholdingRate"/>
     </xs:keyref>
     <xs:keyref name="itemDepartmentRef" refer="departmentKey">
-      <xs:selector xpath=".//Item"/>
+      <xs:selector xpath=".//b:Item"/>
       <xs:field xpath="@department"/>
     </xs:keyref>
     <xs:keyref name="itemProducerRef" refer="producerKey">
-      <xs:selector xpath=".//Item"/>
+      <xs:selector xpath=".//b:Item"/>
       <xs:field xpath="@producer"/>
     </xs:keyref>
   </xs:element>

@@ -195,10 +195,12 @@
   <xsl:template name="n">
     <xsl:param name="v"/>
     <xsl:if test="$v != '' and $v != 0">
-      <xsl:value-of select="format-number($v, '#.##0,00', 'eu')"/>
+      <xsl:value-of select="format-number($v, '@@num_pattern@@', 'eu')"/>
     </xsl:if>
   </xsl:template>
 
-  <xsl:decimal-format name="eu" decimal-separator="," grouping-separator="."/>
+  <!-- Separators localized via num_decimal / num_grouping; pattern uses the
+       canonical role symbols, decimal-format remaps to the per-language ones. -->
+  <xsl:decimal-format name="eu" decimal-separator="@@num_decimal@@" grouping-separator="@@num_grouping@@"/>
 
 </xsl:stylesheet>

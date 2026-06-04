@@ -1,5 +1,8 @@
 {
   "_lang": "ko",
+  "num_decimal": ".",
+  "num_grouping": ",",
+  "num_pattern": "#,##0.00",
   "doc_title_budget": "예산",
   "subtitle_budget": "제작 예산",
   "episodes": "편",
@@ -13,7 +16,6 @@
   "col_charges": "부담금",
   "col_gross": "총액",
   "total_budget": "예산 합계",
-
   "hdr_title": "헤더",
   "hdr_subtitle": "문서 헤더 및 데이터 사전",
   "sec_document": "문서",
@@ -48,7 +50,6 @@
   "c_rate": "세율 %",
   "none_declared": "선언 없음",
   "yes": "예",
-
   "doc_title_cr": "비용 보고서",
   "subtitle_cr": "비용 보고서 기준일",
   "lbl_production": "제작",
@@ -65,5 +66,17 @@
   "col_variance": "차이",
   "col_esttocomplete": "완료까지",
   "col_movement": "변동",
-  "total": "합계"
+  "total": "합계",
+  "doc_title_det": "세부내역",
+  "subtitle_det": "비용 보고서의 근거가 되는 분석적 거래",
+  "det_lbl_costreport": "비용 보고서",
+  "det_col_tree": "장 / 계정 / 거래",
+  "det_col_date": "날짜",
+  "det_col_payee": "거래상대",
+  "det_col_desc": "설명",
+  "det_col_spent": "지출",
+  "det_col_ordered": "발주",
+  "det_document": "문서",
+  "det_payroll": "급여",
+  "det_minimized_note": "거래상대 명부 생략: 코드만 표시됩니다(데이터 최소화)."
 }

@@ -100,11 +100,11 @@
 
     <div class="meta">
       <div>
-        <span class="lbl">Produzione</span>
+        <span class="lbl">Produktion</span>
         <span class="val"><xsl:value-of select="b:Production/b:Code"/></span>
       </div>
       <div>
-        <span class="lbl">Revisione</span>
+        <span class="lbl">Revision</span>
         <span class="val">
           <xsl:value-of select="b:Revision/@number"/>
           <xsl:text> </xsl:text>
@@ -114,26 +114,26 @@
         </span>
       </div>
       <div>
-        <span class="lbl">Emittente</span>
+        <span class="lbl">Absender</span>
         <span class="val"><xsl:value-of select="b:Transmission/b:Sender/b:Name"/></span>
       </div>
       <xsl:if test="b:Transmission/b:Recipient">
         <div>
-          <span class="lbl">Destinatario</span>
+          <span class="lbl">Empfänger</span>
           <span class="val"><xsl:value-of select="b:Transmission/b:Recipient/b:Name"/></span>
         </div>
       </xsl:if>
       <div>
-        <span class="lbl">Documento</span>
+        <span class="lbl">Dokument-ID</span>
         <span class="val"><xsl:value-of select="b:Transmission/b:DocumentId"/></span>
       </div>
       <div>
-        <span class="lbl">Data</span>
+        <span class="lbl">Ausstellungsdatum</span>
         <span class="val"><xsl:value-of select="b:Transmission/b:IssueDate"/></span>
       </div>
       <xsl:if test="b:Production/b:Currency">
         <div>
-          <span class="lbl">Valuta</span>
+          <span class="lbl">Währung</span>
           <span class="val"><xsl:value-of select="b:Production/b:Currency"/></span>
         </div>
       </xsl:if>
@@ -315,7 +315,9 @@
     </tr>
   </xsl:template>
 
-  <!-- Number formatting: thousands sep '.', decimals ',' (Italian) -->
+  <!-- Number formatting: separators are localized (num_decimal / num_grouping).
+       The pattern uses the canonical role symbols (',' grouping, '.' decimal);
+       decimal-format remaps them to the per-language separators. -->
   <xsl:template name="fmt">
     <xsl:param name="n"/>
     <xsl:if test="$n != '' and $n != 0">

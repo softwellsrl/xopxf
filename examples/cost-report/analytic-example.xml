@@ -4,7 +4,7 @@
      the budget examples ("The Long Winter"), measured against budget revision
      003. Figures are illustrative. All names are fictitious. -->
 <CostReport xmlns="urn:xopxf:costreport:1.0"
-            version="1.0" profile="analytic" language="en">
+            version="0.1.0" profile="analytic" language="en">
 
   <Header>
     <Transmission>

@@ -199,6 +199,8 @@
     </xsl:if>
   </xsl:template>
 
+  <!-- Separators localized via num_decimal / num_grouping; pattern uses the
+       canonical role symbols, decimal-format remaps to the per-language ones. -->
   <xsl:decimal-format name="eu" decimal-separator="," grouping-separator="."/>
 
 </xsl:stylesheet>

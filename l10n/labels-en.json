@@ -1,5 +1,8 @@
 {
   "_lang": "en",
+  "num_decimal": ".",
+  "num_grouping": ",",
+  "num_pattern": "#,##0.00",
   "doc_title_budget": "Budget",
   "subtitle_budget": "Production budget",
   "episodes": "episodes",
@@ -13,7 +16,6 @@
   "col_charges": "Charges",
   "col_gross": "Gross",
   "total_budget": "TOTAL BUDGET",
-
   "hdr_title": "Header",
   "hdr_subtitle": "Document header and data dictionary",
   "sec_document": "Document",
@@ -48,7 +50,6 @@
   "c_rate": "Rate %",
   "none_declared": "none declared",
   "yes": "yes",
-
   "doc_title_cr": "Cost Report",
   "subtitle_cr": "Cost report as of",
   "lbl_production": "Production",
@@ -65,5 +66,17 @@
   "col_variance": "Variance",
   "col_esttocomplete": "Est. to complete",
   "col_movement": "Movement",
-  "total": "TOTAL"
+  "total": "TOTAL",
+  "doc_title_det": "Details",
+  "subtitle_det": "Analytic movements behind the cost report",
+  "det_lbl_costreport": "Cost report",
+  "det_col_tree": "Chapter / Account / Movement",
+  "det_col_date": "Date",
+  "det_col_payee": "Counterparty",
+  "det_col_desc": "Description",
+  "det_col_spent": "Spent",
+  "det_col_ordered": "Ordered",
+  "det_document": "document",
+  "det_payroll": "payroll",
+  "det_minimized_note": "Counterparty registry omitted: only payee codes are shown (data minimisation)."
 }

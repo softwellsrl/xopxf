@@ -5,7 +5,7 @@
      (2,819,200 net), proving synthetic is a faithful aggregation of analytic.
      All names are fictitious. -->
 <Budget xmlns="urn:xopxf:budget:1.0"
-        version="1.0" profile="synthetic" language="en">
+        version="0.1.0" profile="synthetic" language="en">
 
   <Header>
     <Transmission>

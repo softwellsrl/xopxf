@@ -1,5 +1,8 @@
 {
   "_lang": "it",
+  "num_decimal": ",",
+  "num_grouping": ".",
+  "num_pattern": "#.##0,00",
   "doc_title_budget": "Budget",
   "subtitle_budget": "Budget di produzione",
   "episodes": "episodi",
@@ -13,7 +16,6 @@
   "col_charges": "Oneri",
   "col_gross": "Lordo",
   "total_budget": "TOTALE BUDGET",
-
   "hdr_title": "Testata",
   "hdr_subtitle": "Testata del documento e dizionario dati",
   "sec_document": "Documento",
@@ -48,7 +50,6 @@
   "c_rate": "Aliquota %",
   "none_declared": "nessuno dichiarato",
   "yes": "sì",
-
   "doc_title_cr": "Cost Report",
   "subtitle_cr": "Cost report al",
   "lbl_production": "Produzione",
@@ -65,5 +66,17 @@
   "col_variance": "Scostamento",
   "col_esttocomplete": "Da completare",
   "col_movement": "Movimento",
-  "total": "TOTALE"
+  "total": "TOTALE",
+  "doc_title_det": "Dettagli",
+  "subtitle_det": "Movimenti analitici a supporto del cost report",
+  "det_lbl_costreport": "Cost report",
+  "det_col_tree": "Capitolo / Conto / Movimento",
+  "det_col_date": "Data",
+  "det_col_payee": "Controparte",
+  "det_col_desc": "Descrizione",
+  "det_col_spent": "Speso",
+  "det_col_ordered": "Ordinato",
+  "det_document": "documento",
+  "det_payroll": "payroll",
+  "det_minimized_note": "Anagrafica controparti omessa: vengono mostrati solo i codici (minimizzazione dei dati)."
 }

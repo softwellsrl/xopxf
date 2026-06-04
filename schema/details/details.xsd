@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  XOPXF eXtended Open Production eXchange Format
+  Details document
+  ===================================================================
+  The underlying analytic movements (invoices, purchase orders, payroll,
+  variations) that justify a Cost Report. Provided on request: this document can
+  carry personal data (payroll), so its transmission is a deliberate choice.
+
+  Relationship to the other documents
+  ===================================
+  A details document explains a Cost Report: it references the cost report it
+  details (CostReportReference) and the budget revision behind it
+  (BudgetReference), and reports individual movements against the chapters and
+  accounts that budget revision declared.
+
+  Analytic only
+  =============
+  Unlike Budget and Cost Report, Details has NO synthetic/analytic profile: it is
+  by nature the list of individual movements. Summing the movements reconstructs
+  the cost report figures, so a "synthetic details" would have no meaning.
+
+  Counterparties and data minimisation (the Parties vocabulary)
+  =============================================================
+  The body never carries a counterparty name inline. Each movement carries at most
+  a payeeRef = an opaque code (a payroll/registry number, "matricola"). Identifying
+  data lives in the optional Header vocabulary Parties: one entry per code, person
+  OR company, with name / tax id / city.
+
+  Minimisation is therefore a transmission choice, not a rewrite of the data:
+    - Header WITH Parties + Body  =  the reader (XSLT) can resolve codes to names.
+    - Body only (Parties omitted) =  only the codes travel; names never leave the
+                                      issuer. The same body is valid in both cases.
+  Because Parties is optional, payeeRef is intentionally NOT enforced by keyref:
+  enforcing it would forbid the minimised form. The reference is "soft" and can be
+  checked by external tools when the header is present.
+
+  Same design as the other schemas
+  ================================
+  Self-contained Header carrying the vocabularies used in the body; Header / Body
+  separation; multi-axis chapter grouping via GroupRef; referential integrity
+  (key/keyref) for every reference EXCEPT the deliberately-soft payeeRef.
+
+  Namespace: urn:xopxf:details:1.0
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="urn:xopxf:details:1.0"
+           xmlns:d="urn:xopxf:details:1.0"
+           targetNamespace="urn:xopxf:details:1.0"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           version="1.0">
+
+  <!-- ============================================================= -->
+  <!--  ROOT                                                          -->
+  <!-- ============================================================= -->
+  <xs:element name="Details">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Header" type="HeaderType"/>
+        <xs:element name="Body"   type="BodyType"/>
+      </xs:sequence>
+      <xs:attribute name="version"  type="xs:string"   use="required"/>
+      <!-- ISO 639-1 language of the human-readable data (descriptions, names) -->
+      <xs:attribute name="language" type="xs:language"  use="optional"/>
+    </xs:complexType>
+
+    <!-- ===================== Referential integrity ===================== -->
+    <!-- Every reference in the Body must point to something declared in the
+         Header, EXCEPT payeeRef (see header comment: deliberately soft so the
+         minimised, header-less form stays valid). -->
+
+    <xs:key name="groupKey">
+      <xs:selector xpath="d:Header/d:Groups/d:Group"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="departmentKey">
+      <xs:selector xpath="d:Header/d:Departments/d:Department"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="producerKey">
+      <xs:selector xpath="d:Header/d:Producers/d:Producer"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="roleKey">
+      <xs:selector xpath="d:Header/d:Roles/d:Role"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="movementTypeKey">
+      <xs:selector xpath="d:Header/d:MovementTypes/d:MovementType"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <!-- Parties key: declared so its uniqueness is enforced WHEN present.
+         payeeRef is NOT bound to it by keyref (soft reference, see above). -->
+    <xs:key name="partyKey">
+      <xs:selector xpath="d:Header/d:Parties/d:Party"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+
+    <xs:keyref name="groupRef" refer="groupKey">
+      <xs:selector xpath="d:Body/d:Chapter/d:GroupRef"/>
+      <xs:field xpath="@group"/>
+    </xs:keyref>
+    <xs:keyref name="movementTypeRef" refer="movementTypeKey">
+      <xs:selector xpath=".//d:Movement"/>
+      <xs:field xpath="@type"/>
+    </xs:keyref>
+    <xs:keyref name="movementRoleRef" refer="roleKey">
+      <xs:selector xpath=".//d:Movement"/>
+      <xs:field xpath="@role"/>
+    </xs:keyref>
+    <xs:keyref name="movementDepartmentRef" refer="departmentKey">
+      <xs:selector xpath=".//d:Movement"/>
+      <xs:field xpath="@department"/>
+    </xs:keyref>
+    <xs:keyref name="movementProducerRef" refer="producerKey">
+      <xs:selector xpath=".//d:Movement"/>
+      <xs:field xpath="@producer"/>
+    </xs:keyref>
+    <!-- Party role (a person's usual role) resolved against the Roles vocabulary -->
+    <xs:keyref name="partyRoleRef" refer="roleKey">
+      <xs:selector xpath="d:Header/d:Parties/d:Party"/>
+      <xs:field xpath="@role"/>
+    </xs:keyref>
+  </xs:element>
+
+  <!-- ============================================================= -->
+  <!--  HEADER                                                        -->
+  <!-- ============================================================= -->
+  <xs:complexType name="HeaderType">
+    <xs:sequence>
+      <xs:element name="Transmission"        type="TransmissionType"/>
+      <xs:element name="Production"          type="ProductionType"/>
+      <xs:element name="BudgetReference"     type="BudgetReferenceType"/>
+      <!-- the cost report whose figures these movements justify -->
+      <xs:element name="CostReportReference" type="CostReportReferenceType"/>
+
+      <!-- vocabularies used in the body (all optional) -->
+      <xs:element name="Groups"        type="GroupListType"        minOccurs="0"/>
+      <xs:element name="Departments"   type="DepartmentListType"   minOccurs="0"/>
+      <xs:element name="Producers"     type="ProducerListType"     minOccurs="0"/>
+      <xs:element name="Roles"         type="RoleListType"         minOccurs="0"/>
+      <xs:element name="MovementTypes" type="MovementTypeListType" minOccurs="0"/>
+      <!-- counterparty registry: optional by design (data minimisation) -->
+      <xs:element name="Parties"       type="PartyListType"        minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TransmissionType">
+    <xs:sequence>
+      <xs:element name="Sender"     type="PartyRefType"/>
+      <xs:element name="Recipient"  type="PartyRefType" minOccurs="0"/>
+      <xs:element name="DocumentId" type="xs:string"/>
+      <xs:element name="IssueDate"  type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- The transmitting/receiving organisation (not a payroll counterparty). -->
+  <xs:complexType name="PartyRefType">
+    <xs:sequence>
+      <xs:element name="Name"  type="xs:string"/>
+      <xs:element name="VatId" type="xs:string" minOccurs="0"/>
+      <xs:element name="Email" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="ProductionType">
+    <xs:sequence>
+      <xs:element name="Code"     type="xs:string"/>
+      <xs:element name="Title"    type="xs:string"/>
+      <xs:element name="Episodes" type="xs:integer" minOccurs="0"/>
+      <xs:element name="Currency" type="xs:string"  minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Points to the immutable budget revision behind the cost report. -->
+  <xs:complexType name="BudgetReferenceType">
+    <xs:attribute name="productionCode" type="xs:string" use="required"/>
+    <xs:attribute name="revision"       type="xs:string" use="required"/>
+    <xs:attribute name="documentId"     type="xs:string" use="optional"/>
+    <xs:attribute name="date"           type="xs:date"   use="optional"/>
+  </xs:complexType>
+
+  <!-- Points to the cost report these movements explain. -->
+  <xs:complexType name="CostReportReferenceType">
+    <xs:attribute name="documentId" type="xs:string" use="optional"/>
+    <xs:attribute name="number"     type="xs:string" use="optional"/>
+    <xs:attribute name="asOf"       type="xs:date"   use="optional"/>
+  </xs:complexType>
+
+  <!-- ============================================================= -->
+  <!--  HEADER vocabularies                                           -->
+  <!-- ============================================================= -->
+  <xs:complexType name="GroupListType">
+    <xs:sequence>
+      <xs:element name="Group" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code"   type="xs:string" use="required"/>
+          <xs:attribute name="name"   type="xs:string" use="required"/>
+          <xs:attribute name="scheme" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DepartmentListType">
+    <xs:sequence>
+      <xs:element name="Department" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code" type="xs:string" use="required"/>
+          <xs:attribute name="name" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ProducerListType">
+    <xs:sequence>
+      <xs:element name="Producer" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code"  type="xs:string" use="required"/>
+          <xs:attribute name="name"  type="xs:string" use="required"/>
+          <xs:attribute name="vatId" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RoleListType">
+    <xs:sequence>
+      <xs:element name="Role" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code" type="xs:string" use="required"/>
+          <xs:attribute name="name" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- MovementType: nature of a movement (e.g. invoice, purchase order, payroll,
+       variation). Codes are free; meaning is given by the declared name. The
+       optional 'payroll' flag marks movements that carry personal data, so a
+       reader can apply stricter handling. -->
+  <xs:complexType name="MovementTypeListType">
+    <xs:sequence>
+      <xs:element name="MovementType" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code"    type="xs:string"  use="required"/>
+          <xs:attribute name="name"    type="xs:string"  use="required"/>
+          <xs:attribute name="payroll" type="xs:boolean" use="optional" default="false"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Parties: the counterparty registry (the data-minimisation pivot).
+       One list for both persons and companies, distinguished by 'type'. The
+       'code' is the registry/payroll number referenced by Movement/@payeeRef.
+       All identifying fields are optional: a company carries legalName + vatId,
+       a person carries personName (and optionally a role); either may be omitted. -->
+  <xs:complexType name="PartyListType">
+    <xs:sequence>
+      <xs:element name="Party" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code"       type="xs:string"   use="required"/>
+          <xs:attribute name="type"       type="PartyKind"   use="required"/>
+          <xs:attribute name="legalName"  type="xs:string"   use="optional"/>
+          <xs:attribute name="personName" type="xs:string"   use="optional"/>
+          <xs:attribute name="taxId"      type="xs:string"   use="optional"/>
+          <xs:attribute name="vatId"      type="xs:string"   use="optional"/>
+          <xs:attribute name="city"       type="xs:string"   use="optional"/>
+          <!-- a person's usual role, resolved against the Roles vocabulary -->
+          <xs:attribute name="role"       type="xs:string"   use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================= -->
+  <!--  BODY  (chapters > accounts > movements)                       -->
+  <!-- ============================================================= -->
+  <xs:complexType name="BodyType">
+    <xs:sequence>
+      <xs:element name="Chapter" type="ChapterType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChapterType">
+    <xs:sequence>
+      <xs:element name="GroupRef" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="group" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Account" type="AccountType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="code" type="xs:string" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="AccountType">
+    <xs:sequence>
+      <xs:element name="Movement" type="MovementType_" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="code" type="xs:string" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <!-- optional external/alternate coding (e.g. accounting system mapping) -->
+    <xs:attribute name="externalCode" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <!-- A single analytic movement. Maps Teamset ciak.cost_report_dett: a unified
+       record with a type, spent/ordered amounts, an optional payee (by code only)
+       and an optional link to the source document. -->
+  <xs:complexType name="MovementType_">
+    <xs:sequence>
+      <!-- optional link to the source document (invoice/PO/payslip PDF) -->
+      <xs:element name="Document" type="DocumentType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="type"        type="xs:string"  use="required"/>
+    <xs:attribute name="date"        type="xs:date"    use="optional"/>
+    <!-- counterparty by code only; resolved via Header/Parties when present -->
+    <xs:attribute name="payeeRef"    type="xs:string"  use="optional"/>
+    <xs:attribute name="role"        type="xs:string"  use="optional"/>
+    <xs:attribute name="department"  type="xs:string"  use="optional"/>
+    <xs:attribute name="producer"    type="xs:string"  use="optional"/>
+    <!-- agganciamento opzionale alla Line/Item del cost report -->
+    <xs:attribute name="itemRef"     type="xs:string"  use="optional"/>
+    <!-- source document coordinates (number/date of the invoice, PO, payslip) -->
+    <xs:attribute name="documentRef"    type="xs:string" use="optional"/>
+    <xs:attribute name="documentNumber" type="xs:string" use="optional"/>
+    <xs:attribute name="documentDate"   type="xs:date"   use="optional"/>
+    <xs:attribute name="description"    type="xs:string" use="optional"/>
+    <!-- amounts: spent (actual) and ordered (commitment), mirroring cost_report_dett -->
+    <xs:attribute name="spent"       type="xs:decimal" use="optional"/>
+    <xs:attribute name="ordered"     type="xs:decimal" use="optional"/>
+    <!-- optional breakdown of the spent amount -->
+    <xs:attribute name="net"         type="xs:decimal" use="optional"/>
+    <xs:attribute name="charges"     type="xs:decimal" use="optional"/>
+    <xs:attribute name="gross"       type="xs:decimal" use="optional"/>
+    <xs:attribute name="vat"         type="xs:decimal" use="optional"/>
+    <xs:attribute name="withholding" type="xs:decimal" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="DocumentType">
+    <xs:attribute name="url"  type="xs:anyURI" use="required"/>
+    <xs:attribute name="type" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <!-- ============================================================= -->
+  <!--  Simple types                                                  -->
+  <!-- ============================================================= -->
+  <xs:simpleType name="PartyKind">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="person"/>
+      <xs:enumeration value="company"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

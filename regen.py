@@ -23,6 +23,7 @@ TEMPLATES = [
     ("schema/budget/budget-html.template.xslt",            "budget-html"),
     ("schema/budget/header-html.template.xslt",            "header-html"),
     ("schema/cost-report/cost-report-html.template.xslt",  "cost-report-html"),
+    ("schema/details/details-html.template.xslt",          "details-html"),
 ]
 
 PLACEHOLDER = re.compile(r"@@([a-zA-Z0-9_]+)@@")

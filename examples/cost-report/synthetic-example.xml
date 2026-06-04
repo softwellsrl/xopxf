@@ -3,7 +3,7 @@
      Same report as analytic-example.xml, with per-line breakdowns collapsed to
      account totals. All names are fictitious. -->
 <CostReport xmlns="urn:xopxf:costreport:1.0"
-            version="1.0" profile="synthetic" language="en">
+            version="0.1.0" profile="synthetic" language="en">
 
   <Header>
     <Transmission>

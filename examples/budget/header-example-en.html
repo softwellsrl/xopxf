@@ -1,0 +1,391 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Header – The Long Winter</title>
+<style>
+          body { font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+                 color: #222; margin: 24px; font-size: 13px; }
+          h1 { font-size: 20px; margin: 0 0 2px; }
+          .sub { color: #666; margin-bottom: 16px; }
+          h2 { font-size: 14px; margin: 22px 0 6px; color: #2c3e50;
+               border-bottom: 2px solid #2c3e50; padding-bottom: 3px; }
+          .meta { display: flex; flex-wrap: wrap; gap: 22px;
+                  background: #f6f8fa; border: 1px solid #e1e4e8;
+                  border-radius: 6px; padding: 12px 16px; margin-bottom: 8px; }
+          .meta .lbl { color: #888; font-size: 11px; text-transform: uppercase; display:block; }
+          .meta .val { font-weight: 600; }
+          .badge { display: inline-block; padding: 2px 8px; border-radius: 4px;
+                   font-size: 11px; font-weight: 600; }
+          .badge.confirmed { background: #d4f7dd; color: #156b2e; }
+          .badge.draft { background: #fff3cd; color: #856404; }
+          table { border-collapse: collapse; width: 100%; margin-bottom: 4px; }
+          th { background: #34495e; color: #fff; text-align: left;
+               padding: 5px 8px; font-size: 11px; }
+          th.num, td.num { text-align: right; }
+          td { padding: 4px 8px; border-bottom: 1px solid #eee; }
+          tr:nth-child(even) td { background: #fafbfc; }
+          .code { font-family: ui-monospace, monospace; font-size: 11px;
+                  background: #16a085; color: #fff; padding: 1px 6px;
+                  border-radius: 3px; }
+          .scheme { font-size: 10px; background: #e8eef3; color: #555;
+                    padding: 1px 5px; border-radius: 3px; }
+          .empty { color: #aaa; font-style: italic; }
+        </style>
+</head>
+<body>
+<h1>The Long Winter</h1>
+<div class="sub">Document header and data dictionary</div>
+<h2>Document</h2>
+<div class="meta">
+<div>
+<span class="lbl">Document ID</span><span class="val">NWP-LONGWINTER-BDG-003</span>
+</div>
+<div>
+<span class="lbl">Issue date</span><span class="val">2026-05-20</span>
+</div>
+<div>
+<span class="lbl">Sender</span><span class="val">Northwind Pictures Ltd</span>
+</div>
+<div>
+<span class="lbl">Recipient</span><span class="val">Acme Broadcasting Group</span>
+</div>
+</div>
+<h2>Production</h2>
+<div class="meta">
+<div>
+<span class="lbl">Code</span><span class="val">LONGWINTER</span>
+</div>
+<div>
+<span class="lbl">Title</span><span class="val">The Long Winter</span>
+</div>
+<div>
+<span class="lbl">Episodes</span><span class="val">8</span>
+</div>
+<div>
+<span class="lbl">Currency</span><span class="val">EUR</span>
+</div>
+<div>
+<span class="lbl">Start</span><span class="val">2026-09-01</span>
+</div>
+<div>
+<span class="lbl">End</span><span class="val">2027-05-31</span>
+</div>
+<div>
+<span class="lbl">Revision</span><span class="val">003 <span class="badge confirmed">confirmed</span></span>
+</div>
+</div>
+<h2>Groups</h2>
+<table>
+<thead><tr>
+<th>Code</th>
+<th>Name</th>
+<th>Scheme</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><span class="code">ATL</span></td>
+<td>Above the line</td>
+<td><span class="scheme">line</span></td>
+</tr>
+<tr>
+<td><span class="code">BTL</span></td>
+<td>Below the line</td>
+<td><span class="scheme">line</span></td>
+</tr>
+<tr>
+<td><span class="code">POST</span></td>
+<td>Post-production</td>
+<td><span class="scheme">line</span></td>
+</tr>
+<tr>
+<td><span class="code">TRAVEL</span></td>
+<td>Travel and living</td>
+<td><span class="scheme">line</span></td>
+</tr>
+<tr>
+<td><span class="code">FEE</span></td>
+<td>Producer fee and overhead</td>
+<td><span class="scheme">line</span></td>
+</tr>
+<tr>
+<td><span class="code">BCAST</span></td>
+<td>Broadcaster share</td>
+<td><span class="scheme">financier</span></td>
+</tr>
+<tr>
+<td><span class="code">FUND</span></td>
+<td>Public fund / tax credit</td>
+<td><span class="scheme">financier</span></td>
+</tr>
+</tbody>
+</table>
+<h2>Phases</h2>
+<table>
+<thead><tr>
+<th>Code</th>
+<th>Name</th>
+<th>Start</th>
+<th>End</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><span class="code">DEV</span></td>
+<td>Development</td>
+<td>2026-09-01</td>
+<td>2026-09-30</td>
+</tr>
+<tr>
+<td><span class="code">PREP</span></td>
+<td>Pre-production</td>
+<td>2026-10-01</td>
+<td>2026-11-15</td>
+</tr>
+<tr>
+<td><span class="code">SHOOT</span></td>
+<td>Principal photography</td>
+<td>2026-11-16</td>
+<td>2027-02-15</td>
+</tr>
+<tr>
+<td><span class="code">WRAP</span></td>
+<td>Wrap</td>
+<td>2027-02-16</td>
+<td>2027-02-28</td>
+</tr>
+<tr>
+<td><span class="code">POST</span></td>
+<td>Post-production</td>
+<td>2027-03-01</td>
+<td>2027-05-31</td>
+</tr>
+</tbody>
+</table>
+<h2>Departments</h2>
+<table>
+<thead><tr>
+<th>Code</th>
+<th>Name</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><span class="code">PROD</span></td>
+<td>Production office</td>
+</tr>
+<tr>
+<td><span class="code">DIR</span></td>
+<td>Direction</td>
+</tr>
+<tr>
+<td><span class="code">CAST</span></td>
+<td>Cast</td>
+</tr>
+<tr>
+<td><span class="code">CAM</span></td>
+<td>Camera</td>
+</tr>
+<tr>
+<td><span class="code">LIGHT</span></td>
+<td>Lighting</td>
+</tr>
+<tr>
+<td><span class="code">ART</span></td>
+<td>Art department</td>
+</tr>
+<tr>
+<td><span class="code">COST</span></td>
+<td>Costume and make-up</td>
+</tr>
+<tr>
+<td><span class="code">SND</span></td>
+<td>Sound</td>
+</tr>
+<tr>
+<td><span class="code">LOC</span></td>
+<td>Locations</td>
+</tr>
+<tr>
+<td><span class="code">EDIT</span></td>
+<td>Editing</td>
+</tr>
+</tbody>
+</table>
+<h2>Producers</h2>
+<table>
+<thead><tr>
+<th>Code</th>
+<th>Name</th>
+<th>VAT ID</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><span class="code">NWP</span></td>
+<td>Northwind Pictures Ltd</td>
+<td>GB000000000</td>
+</tr>
+<tr>
+<td><span class="code">SCP</span></td>
+<td>Silverpeak Co-Production</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2>Roles</h2>
+<table>
+<thead><tr>
+<th>Code</th>
+<th>Name</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><span class="code">EP</span></td>
+<td>Executive producer</td>
+</tr>
+<tr>
+<td><span class="code">LP</span></td>
+<td>Line producer</td>
+</tr>
+<tr>
+<td><span class="code">DIR</span></td>
+<td>Director</td>
+</tr>
+<tr>
+<td><span class="code">WRIT</span></td>
+<td>Writer</td>
+</tr>
+<tr>
+<td><span class="code">LEAD</span></td>
+<td>Lead actor</td>
+</tr>
+<tr>
+<td><span class="code">SUPP</span></td>
+<td>Supporting actor</td>
+</tr>
+<tr>
+<td><span class="code">DOP</span></td>
+<td>Director of photography</td>
+</tr>
+<tr>
+<td><span class="code">GAFF</span></td>
+<td>Gaffer</td>
+</tr>
+<tr>
+<td><span class="code">PD</span></td>
+<td>Production designer</td>
+</tr>
+<tr>
+<td><span class="code">COSD</span></td>
+<td>Costume designer</td>
+</tr>
+<tr>
+<td><span class="code">SREC</span></td>
+<td>Sound recordist</td>
+</tr>
+<tr>
+<td><span class="code">EDIT</span></td>
+<td>Editor</td>
+</tr>
+</tbody>
+</table>
+<h2>Units of measure</h2>
+<table>
+<thead><tr>
+<th>Code</th>
+<th>Name</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><span class="code">WK</span></td>
+<td>Week</td>
+</tr>
+<tr>
+<td><span class="code">DAY</span></td>
+<td>Day</td>
+</tr>
+<tr>
+<td><span class="code">FLAT</span></td>
+<td>Flat fee</td>
+</tr>
+<tr>
+<td><span class="code">ITEM</span></td>
+<td>Item</td>
+</tr>
+</tbody>
+</table>
+<h2>Detail types</h2>
+<table>
+<thead><tr>
+<th>Code</th>
+<th>Name</th>
+<th>Contingency</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><span class="code">PUR</span></td>
+<td>Purchase / rental</td>
+<td></td>
+</tr>
+<tr>
+<td><span class="code">FEE</span></td>
+<td>Fee / compensation</td>
+<td></td>
+</tr>
+<tr>
+<td><span class="code">RIS</span></td>
+<td>Contingency</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table>
+<h2>VAT rates</h2>
+<table>
+<thead><tr>
+<th>Code</th>
+<th>Name</th>
+<th class="num">Rate %</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><span class="code">STD</span></td>
+<td>Standard rate 22%</td>
+<td class="num">22.00</td>
+</tr>
+<tr>
+<td><span class="code">RED</span></td>
+<td>Reduced rate 10%</td>
+<td class="num">10.00</td>
+</tr>
+<tr>
+<td><span class="code">ZERO</span></td>
+<td>Zero rated</td>
+<td class="num">0.00</td>
+</tr>
+</tbody>
+</table>
+<h2>Withholding rates</h2>
+<table>
+<thead><tr>
+<th>Code</th>
+<th>Name</th>
+<th class="num">Rate %</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><span class="code">NO</span></td>
+<td>No withholding</td>
+<td class="num">0.00</td>
+</tr>
+<tr>
+<td><span class="code">W20</span></td>
+<td>Withholding 20%</td>
+<td class="num">20.00</td>
+</tr>
+<tr>
+<td><span class="code">W23</span></td>
+<td>Withholding 23%</td>
+<td class="num">23.00</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

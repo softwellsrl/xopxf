@@ -1,0 +1,609 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>预算 The Long Winter</title>
+<style>
+          body { font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+                 color: #222; margin: 24px; font-size: 13px; }
+          h1 { font-size: 20px; margin: 0 0 2px; }
+          .sub { color: #666; margin-bottom: 16px; }
+          .meta { display: flex; flex-wrap: wrap; gap: 24px;
+                  background: #f6f8fa; border: 1px solid #e1e4e8;
+                  border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; }
+          .meta div span { display: block; }
+          .meta .lbl { color: #888; font-size: 11px; text-transform: uppercase; }
+          .meta .val { font-weight: 600; }
+          .badge { display: inline-block; padding: 2px 8px; border-radius: 4px;
+                   font-size: 11px; font-weight: 600; }
+          .badge.confirmed { background: #d4f7dd; color: #156b2e; }
+          .badge.draft { background: #fff3cd; color: #856404; }
+          .legend { font-size: 11px; color: #555; margin-bottom: 20px; }
+          .legend b { color: #333; }
+          table { border-collapse: collapse; width: 100%; }
+          th { background: #2c3e50; color: #fff; text-align: left;
+               padding: 6px 8px; font-size: 11px; }
+          th.num, td.num { text-align: right; }
+          td { padding: 5px 8px; border-bottom: 1px solid #eee; }
+          tr.chapter td { background: #34495e; color: #fff; font-weight: 700;
+                          font-size: 13px; }
+          tr.account td { background: #ecf3f9; font-weight: 600; }
+          tr.item td { background: #f8fbfd; font-style: italic; color: #16608a;
+                       padding-left: 24px; }
+          tr.detail td.desc { padding-left: 36px; }
+          tr.detail.contingency td { color: #b1610a; }
+          .code { font-family: ui-monospace, monospace; font-size: 11px;
+                  background: #16a085; color: #fff; padding: 1px 6px;
+                  border-radius: 3px; margin-right: 6px; }
+          tr.total td { font-weight: 700; border-top: 2px solid #2c3e50;
+                        background: #fafafa; }
+          .tag { font-size: 10px; background: #e8eef3; color: #555;
+                 padding: 1px 5px; border-radius: 3px; margin-left: 4px; }
+        </style>
+</head>
+<body>
+<h1>The Long Winter</h1>
+<div class="sub">制作预算 · 8 集</div>
+<div class="meta">
+<div>
+<span class="lbl">制作</span><span class="val">LONGWINTER</span>
+</div>
+<div>
+<span class="lbl">修订</span><span class="val">003 <span class="badge confirmed">confirmed</span></span>
+</div>
+<div>
+<span class="lbl">发送方</span><span class="val">Northwind Pictures Ltd</span>
+</div>
+<div>
+<span class="lbl">接收方</span><span class="val">Acme Broadcasting Group</span>
+</div>
+<div>
+<span class="lbl">文件编号</span><span class="val">NWP-LONGWINTER-BDG-003-S</span>
+</div>
+<div>
+<span class="lbl">签发日期</span><span class="val">2026-05-20</span>
+</div>
+<div>
+<span class="lbl">货币</span><span class="val">EUR</span>
+</div>
+</div>
+<div class="legend">
+<b>分组: </b>ATL = Above the line (line) · BTL = Below the line (line) · POST = Post-production (line) · TRAVEL = Travel and living (line) · FEE = Producer fee and overhead (line) · BCAST = Broadcaster share (financier) · FUND = Public fund / tax credit (financier)</div>
+<table>
+<thead><tr>
+<th>章 / 科目 / 条目 / 明细</th>
+<th>类型</th>
+<th>阶段</th>
+<th class="num">数量</th>
+<th class="num">单价</th>
+<th class="num">净额</th>
+<th class="num">费用</th>
+<th class="num">总额</th>
+</tr></thead>
+<tbody>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">1100</span>Story and rights<span class="tag">Above the line</span><span class="tag">Public fund / tax credit</span>
+</td>
+<td class="num">236,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">1101</span>Rights acquisition<span class="tag">011.001</span>
+</td>
+<td class="num">80,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Rights acquisition</td>
+<td>Purchase / rental</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">80,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">1102</span>Writing<span class="tag">011.002</span>
+</td>
+<td class="num">156,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Writers (head + staff)</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">156,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">1200</span>Direction<span class="tag">Above the line</span>
+</td>
+<td class="num">120,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">1201</span>Director<span class="tag">012.001</span>
+</td>
+<td class="num">120,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Series director</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">120,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">1300</span>Principal cast<span class="tag">Above the line</span>
+</td>
+<td class="num">445,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">1301</span>Lead cast<span class="tag">013.001</span>
+</td>
+<td class="num">325,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Lead and co-lead</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">325,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">1302</span>Supporting cast<span class="tag">013.002</span>
+</td>
+<td class="num">120,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Supporting cast</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">120,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">2000</span>Production unit<span class="tag">Below the line</span><span class="tag">Broadcaster share</span>
+</td>
+<td class="num">205,400.00</td>
+<td class="num">55,320.00</td>
+<td class="num">239,720.00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2001</span>Production staff<span class="tag">020.001</span>
+</td>
+<td class="num">205,400.00</td>
+<td class="num">55,320.00</td>
+<td class="num">239,720.00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Production staff (fees)</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">184,400.00</td>
+<td class="num">55,320.00</td>
+<td class="num">239,720.00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Production office</td>
+<td>Purchase / rental</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">21,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">2400</span>Camera and lighting<span class="tag">Below the line</span><span class="tag">Broadcaster share</span>
+</td>
+<td class="num">338,000.00</td>
+<td class="num">64,350.00</td>
+<td class="num">278,850.00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2401</span>Camera crew<span class="tag">024.001</span>
+</td>
+<td class="num">152,100.00</td>
+<td class="num">45,630.00</td>
+<td class="num">197,730.00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Camera crew</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">152,100.00</td>
+<td class="num">45,630.00</td>
+<td class="num">197,730.00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2402</span>Camera equipment<span class="tag">024.002</span>
+</td>
+<td class="num">78,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Camera package rental</td>
+<td>Purchase / rental</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">78,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2403</span>Lighting<span class="tag">024.003</span>
+</td>
+<td class="num">107,900.00</td>
+<td class="num">18,720.00</td>
+<td class="num">81,120.00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Lighting crew</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">62,400.00</td>
+<td class="num">18,720.00</td>
+<td class="num">81,120.00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Lighting and grip rental</td>
+<td>Purchase / rental</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">45,500.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">2700</span>Art department<span class="tag">Below the line</span>
+</td>
+<td class="num">360,000.00</td>
+<td class="num">36,000.00</td>
+<td class="num">156,000.00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2701</span>Art crew<span class="tag">027.001</span>
+</td>
+<td class="num">120,000.00</td>
+<td class="num">36,000.00</td>
+<td class="num">156,000.00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Art crew</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">120,000.00</td>
+<td class="num">36,000.00</td>
+<td class="num">156,000.00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2702</span>Sets and construction<span class="tag">027.002</span>
+</td>
+<td class="num">240,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Construction, dressing and props</td>
+<td>Purchase / rental</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">240,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">2800</span>Costume and make-up<span class="tag">Below the line</span>
+</td>
+<td class="num">125,200.00</td>
+<td class="num">21,060.00</td>
+<td class="num">91,260.00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2801</span>Costume<span class="tag">028.001</span>
+</td>
+<td class="num">125,200.00</td>
+<td class="num">21,060.00</td>
+<td class="num">91,260.00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Costume crew</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">70,200.00</td>
+<td class="num">21,060.00</td>
+<td class="num">91,260.00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Costumes</td>
+<td>Purchase / rental</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">55,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">2600</span>Sound<span class="tag">Below the line</span>
+</td>
+<td class="num">55,900.00</td>
+<td class="num">13,260.00</td>
+<td class="num">57,460.00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">2601</span>Production sound<span class="tag">026.001</span>
+</td>
+<td class="num">55,900.00</td>
+<td class="num">13,260.00</td>
+<td class="num">57,460.00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Sound crew</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">44,200.00</td>
+<td class="num">13,260.00</td>
+<td class="num">57,460.00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Sound equipment rental</td>
+<td>Purchase / rental</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">11,700.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">3000</span>Travel and living<span class="tag">Travel and living</span>
+</td>
+<td class="num">230,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">3001</span>Locations<span class="tag">030.001</span>
+</td>
+<td class="num">230,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Location fees and permits</td>
+<td>Purchase / rental</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">90,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Travel, hotels, per diems</td>
+<td>Purchase / rental</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">140,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">4000</span>Post-production<span class="tag">Post-production</span><span class="tag">Public fund / tax credit</span>
+</td>
+<td class="num">378,700.00</td>
+<td class="num">17,160.00</td>
+<td class="num">74,360.00</td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">4001</span>Editing<span class="tag">040.001</span>
+</td>
+<td class="num">76,700.00</td>
+<td class="num">17,160.00</td>
+<td class="num">74,360.00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Editorial</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">57,200.00</td>
+<td class="num">17,160.00</td>
+<td class="num">74,360.00</td>
+</tr>
+<tr class="detail">
+<td class="desc">Edit suites rental</td>
+<td>Purchase / rental</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">19,500.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">4002</span>Sound post<span class="tag">040.002</span>
+</td>
+<td class="num">72,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Sound mix and design</td>
+<td>Purchase / rental</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">72,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">4003</span>Visual effects and grading<span class="tag">040.003</span>
+</td>
+<td class="num">160,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">VFX and color grading</td>
+<td>Purchase / rental</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">160,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">4004</span>Music<span class="tag">040.004</span>
+</td>
+<td class="num">70,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Original score</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">70,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">3800</span>Producer fee and overhead<span class="tag">Producer fee and overhead</span>
+</td>
+<td class="num">195,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">3801</span>Producer fee<span class="tag">038.001</span>
+</td>
+<td class="num">195,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail">
+<td class="desc">Producer fee</td>
+<td>Fee / compensation</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">195,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="chapter">
+<td colspan="5">
+<span class="code">3900</span>Contingency<span class="tag">Producer fee and overhead</span>
+</td>
+<td class="num">130,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="account">
+<td colspan="5">
+<span class="code">3901</span>General contingency<span class="tag">039.001</span>
+</td>
+<td class="num">130,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="detail contingency">
+<td class="desc">Contingency</td>
+<td>Contingency</td>
+<td></td>
+<td class="num"></td>
+<td class="num"></td>
+<td class="num">130,000.00</td>
+<td class="num"></td>
+<td class="num"></td>
+</tr>
+<tr class="total">
+<td colspan="5">预算合计</td>
+<td class="num">2,819,200.00</td>
+<td class="num">207,150.00</td>
+<td class="num">897,650.00</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
