@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Cost Report, synthetic profile: Chapter > Account, figures on the account.
+     Same report as analytic-example.xml, with per-line breakdowns collapsed to
+     account totals. All names are fictitious. -->
+<CostReport xmlns="urn:xopxf:costreport:1.0"
+            version="1.0" profile="synthetic" language="en">
+
+  <Header>
+    <Transmission>
+      <Sender>
+        <Name>Northwind Pictures Ltd</Name>
+        <VatId>GB000000000</VatId>
+      </Sender>
+      <Recipient>
+        <Name>Acme Broadcasting Group</Name>
+      </Recipient>
+      <DocumentId>NWP-LONGWINTER-CR-012-S</DocumentId>
+      <IssueDate>2026-12-22</IssueDate>
+    </Transmission>
+
+    <Production>
+      <Code>LONGWINTER</Code>
+      <Title>The Long Winter</Title>
+      <Episodes>8</Episodes>
+      <Currency>EUR</Currency>
+    </Production>
+
+    <BudgetReference productionCode="LONGWINTER" revision="003"
+                     documentId="NWP-LONGWINTER-BDG-003" date="2026-05-20"/>
+
+    <Reporting number="012" asOf="2026-12-20" fromDate="2026-12-14" toDate="2026-12-20"/>
+    <PreviousReport documentId="NWP-LONGWINTER-CR-011" number="011" asOf="2026-12-13"/>
+
+    <Groups>
+      <Group scheme="line" code="ATL"  name="Above the line"/>
+      <Group scheme="line" code="BTL"  name="Below the line"/>
+      <Group scheme="line" code="FEE"  name="Producer fee and overhead"/>
+    </Groups>
+  </Header>
+
+  <Body>
+
+    <Chapter code="1300" name="Principal cast">
+      <GroupRef group="ATL"/>
+      <Account code="1301" name="Lead cast" externalCode="013.001">
+        <Figures budget="325000" spentToDate="200000" committed="125000"
+                 costToDate="325000" efc="325000" variance="0" estToComplete="0"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="2400" name="Camera and lighting">
+      <GroupRef group="BTL"/>
+      <Account code="2401" name="Camera crew" externalCode="024.001">
+        <Figures budget="197730" spentToDate="121680" committed="76050"
+                 costToDate="197730" efc="197730" variance="0" estToComplete="0"/>
+      </Account>
+      <Account code="2402" name="Camera equipment" externalCode="024.002">
+        <Figures budget="78000" spentToDate="48000" committed="36000"
+                 costToDate="84000" efc="84000" variance="-6000" estToComplete="0">
+          <Benchmark pastEfc="80000" pastVariance="-2000" movement="-4000"/>
+        </Figures>
+      </Account>
+      <Account code="2403" name="Lighting" externalCode="024.003">
+        <Figures budget="126620" spentToDate="78000" committed="48620"
+                 costToDate="126620" efc="126620" variance="0" estToComplete="0"/>
+      </Account>
+    </Chapter>
+
+    <Chapter code="3900" name="Contingency">
+      <GroupRef group="FEE"/>
+      <Account code="3901" name="General contingency" externalCode="039.001">
+        <Figures budget="130000" spentToDate="0" committed="0" costToDate="0"
+                 reserve="130000" efc="124000" variance="6000" estToComplete="124000">
+          <Benchmark pastEfc="126000" pastVariance="4000" movement="2000"/>
+        </Figures>
+      </Account>
+    </Chapter>
+
+  </Body>
+</CostReport>

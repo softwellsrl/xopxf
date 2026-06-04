@@ -90,11 +90,11 @@
       <xsl:value-of select="b:Production/b:Title"/>
     </h1>
     <div class="sub">
-      <xsl:text>Production budget</xsl:text>
+      <xsl:text>Budget de production</xsl:text>
       <xsl:if test="b:Production/b:Episodes">
         <xsl:text> &#183; </xsl:text>
         <xsl:value-of select="b:Production/b:Episodes"/>
-        <xsl:text> episodes</xsl:text>
+        <xsl:text> épisodes</xsl:text>
       </xsl:if>
     </div>
 
@@ -141,7 +141,7 @@
 
     <xsl:if test="b:Groups/b:Group">
       <div class="legend">
-        <b>Groups: </b>
+        <b>Groupes: </b>
         <xsl:for-each select="b:Groups/b:Group">
           <xsl:value-of select="@code"/>
           <xsl:text> = </xsl:text>
@@ -162,14 +162,14 @@
     <table>
       <thead>
         <tr>
-          <th>Chapter / Account / Item / Detail</th>
+          <th>Chapitre / Compte / Poste / Détail</th>
           <th>Type</th>
           <th>Phase</th>
-          <th class="num">Qty</th>
-          <th class="num">Unit price</th>
+          <th class="num">Qté</th>
+          <th class="num">Prix unit.</th>
           <th class="num">Net</th>
           <th class="num">Charges</th>
-          <th class="num">Gross</th>
+          <th class="num">Brut</th>
         </tr>
       </thead>
       <tbody>

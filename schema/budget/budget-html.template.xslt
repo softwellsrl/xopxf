@@ -34,7 +34,7 @@
       <head>
         <meta charset="UTF-8"/>
         <title>
-          <xsl:text>Budget </xsl:text>
+          <xsl:text>@@doc_title_budget@@ </xsl:text>
           <xsl:value-of select="b:Header/b:Production/b:Title"/>
         </title>
         <style>
@@ -90,11 +90,11 @@
       <xsl:value-of select="b:Production/b:Title"/>
     </h1>
     <div class="sub">
-      <xsl:text>Production budget</xsl:text>
+      <xsl:text>@@subtitle_budget@@</xsl:text>
       <xsl:if test="b:Production/b:Episodes">
         <xsl:text> &#183; </xsl:text>
         <xsl:value-of select="b:Production/b:Episodes"/>
-        <xsl:text> episodes</xsl:text>
+        <xsl:text> @@episodes@@</xsl:text>
       </xsl:if>
     </div>
 
@@ -141,7 +141,7 @@
 
     <xsl:if test="b:Groups/b:Group">
       <div class="legend">
-        <b>Groups: </b>
+        <b>@@groups@@: </b>
         <xsl:for-each select="b:Groups/b:Group">
           <xsl:value-of select="@code"/>
           <xsl:text> = </xsl:text>
@@ -162,20 +162,20 @@
     <table>
       <thead>
         <tr>
-          <th>Chapter / Account / Item / Detail</th>
-          <th>Type</th>
-          <th>Phase</th>
-          <th class="num">Qty</th>
-          <th class="num">Unit price</th>
-          <th class="num">Net</th>
-          <th class="num">Charges</th>
-          <th class="num">Gross</th>
+          <th>@@col_tree@@</th>
+          <th>@@col_type@@</th>
+          <th>@@col_phase@@</th>
+          <th class="num">@@col_qty@@</th>
+          <th class="num">@@col_unitprice@@</th>
+          <th class="num">@@col_net@@</th>
+          <th class="num">@@col_charges@@</th>
+          <th class="num">@@col_gross@@</th>
         </tr>
       </thead>
       <tbody>
         <xsl:apply-templates select="b:Body/b:Chapter"/>
         <tr class="total">
-          <td colspan="5">TOTAL BUDGET</td>
+          <td colspan="5">@@total_budget@@</td>
           <td class="num">
             <xsl:call-template name="fmt">
               <xsl:with-param name="n" select="sum(//b:Detail/@netAmount)"/>

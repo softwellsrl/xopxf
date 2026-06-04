@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  XOPXF eXtended Open Production eXchange Format
+  Cost Report document
+  ===================================================================
+  A periodic statement of financial progress for a production, measured against
+  a specific, confirmed budget revision. The producer's "SAL" (state of work)
+  delivered to the commissioning party.
+
+  Relationship to the Budget document
+  ===================================
+  A cost report does NOT redefine the chart of accounts: it references a Budget
+  revision via BudgetReference (production code + revision number) and reports
+  figures against the chapters/accounts that revision declared. The codes used
+  here are expected to exist in that budget revision.
+
+  Same design as the Budget schema
+  ================================
+  - Self-contained Header carrying the vocabularies (groups, etc.) used in body.
+  - Header / Body separation.
+  - Two profiles via one optional level: synthetic = metrics on Account;
+    analytic = metrics broken down per Item (department / producer) under Account.
+  - Multi-axis chapter grouping via GroupRef.
+  - Referential integrity (key/keyref) between body references and header.
+
+  Metrics (per account, mirroring established cost report practice)
+  =================================================================
+    budget          approved budget for the line
+    spentToDate     actual cost incurred to date
+    committed       open commitments (e.g. purchase orders not yet invoiced)
+    costToDate      spentToDate + committed
+    reserve         contingency/reserve carried on the line
+    efc             estimate of final cost
+    variance        budget - efc (negative = overrun)
+    estToComplete   efc - costToDate
+  Optional benchmark block compares against a previous cost report:
+    pastEfc, pastVariance, movement.
+
+  Namespace: urn:xopxf:costreport:1.0
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="urn:xopxf:costreport:1.0"
+           targetNamespace="urn:xopxf:costreport:1.0"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified"
+           version="1.0">
+
+  <!-- ============================================================= -->
+  <!--  ROOT                                                          -->
+  <!-- ============================================================= -->
+  <xs:element name="CostReport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Header" type="HeaderType"/>
+        <xs:element name="Body"   type="BodyType"/>
+      </xs:sequence>
+      <xs:attribute name="version"  type="xs:string"  use="required"/>
+      <xs:attribute name="profile"  type="ProfileType" use="required"/>
+      <xs:attribute name="language" type="xs:language" use="optional"/>
+    </xs:complexType>
+
+    <!-- ===================== Referential integrity ===================== -->
+    <xs:key name="groupKey">
+      <xs:selector xpath="Header/Groups/Group"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="departmentKey">
+      <xs:selector xpath="Header/Departments/Department"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+    <xs:key name="producerKey">
+      <xs:selector xpath="Header/Producers/Producer"/>
+      <xs:field xpath="@code"/>
+    </xs:key>
+
+    <xs:keyref name="groupRef" refer="groupKey">
+      <xs:selector xpath="Body/Chapter/GroupRef"/>
+      <xs:field xpath="@group"/>
+    </xs:keyref>
+    <xs:keyref name="lineDepartmentRef" refer="departmentKey">
+      <xs:selector xpath=".//Line"/>
+      <xs:field xpath="@department"/>
+    </xs:keyref>
+    <xs:keyref name="lineProducerRef" refer="producerKey">
+      <xs:selector xpath=".//Line"/>
+      <xs:field xpath="@producer"/>
+    </xs:keyref>
+  </xs:element>
+
+  <!-- ============================================================= -->
+  <!--  HEADER                                                        -->
+  <!-- ============================================================= -->
+  <xs:complexType name="HeaderType">
+    <xs:sequence>
+      <xs:element name="Transmission"    type="TransmissionType"/>
+      <xs:element name="Production"      type="ProductionType"/>
+      <xs:element name="BudgetReference" type="BudgetReferenceType"/>
+      <!-- reporting period / as-of date of this cost report -->
+      <xs:element name="Reporting"       type="ReportingType"/>
+      <!-- optional reference to the previous cost report (for benchmark figures) -->
+      <xs:element name="PreviousReport"  type="PreviousReportType" minOccurs="0"/>
+
+      <!-- vocabularies used in the body (subset for this report) -->
+      <xs:element name="Groups"      type="GroupListType"      minOccurs="0"/>
+      <xs:element name="Departments" type="DepartmentListType" minOccurs="0"/>
+      <xs:element name="Producers"   type="ProducerListType"   minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TransmissionType">
+    <xs:sequence>
+      <xs:element name="Sender"     type="PartyType"/>
+      <xs:element name="Recipient"  type="PartyType" minOccurs="0"/>
+      <xs:element name="DocumentId" type="xs:string"/>
+      <xs:element name="IssueDate"  type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PartyType">
+    <xs:sequence>
+      <xs:element name="Name"  type="xs:string"/>
+      <xs:element name="VatId" type="xs:string" minOccurs="0"/>
+      <xs:element name="Email" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="code" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="ProductionType">
+    <xs:sequence>
+      <xs:element name="Code"     type="xs:string"/>
+      <xs:element name="Title"    type="xs:string"/>
+      <xs:element name="Episodes" type="xs:integer" minOccurs="0"/>
+      <xs:element name="Currency" type="xs:string"  minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Points to the immutable budget revision this report measures against. -->
+  <xs:complexType name="BudgetReferenceType">
+    <xs:attribute name="productionCode" type="xs:string" use="required"/>
+    <xs:attribute name="revision"       type="xs:string" use="required"/>
+    <xs:attribute name="documentId"     type="xs:string" use="optional"/>
+    <xs:attribute name="date"           type="xs:date"   use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="ReportingType">
+    <!-- progressive number of this report within the production -->
+    <xs:attribute name="number"  type="xs:string" use="optional"/>
+    <!-- the date the figures are stated as of -->
+    <xs:attribute name="asOf"    type="xs:date"   use="required"/>
+    <xs:attribute name="fromDate" type="xs:date"  use="optional"/>
+    <xs:attribute name="toDate"   type="xs:date"  use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="PreviousReportType">
+    <xs:attribute name="documentId" type="xs:string" use="optional"/>
+    <xs:attribute name="number"     type="xs:string" use="optional"/>
+    <xs:attribute name="asOf"       type="xs:date"   use="optional"/>
+  </xs:complexType>
+
+  <!-- ============================================================= -->
+  <!--  HEADER vocabularies                                           -->
+  <!-- ============================================================= -->
+  <xs:complexType name="GroupListType">
+    <xs:sequence>
+      <xs:element name="Group" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code"   type="xs:string" use="required"/>
+          <xs:attribute name="name"   type="xs:string" use="required"/>
+          <xs:attribute name="scheme" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DepartmentListType">
+    <xs:sequence>
+      <xs:element name="Department" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code" type="xs:string" use="required"/>
+          <xs:attribute name="name" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ProducerListType">
+    <xs:sequence>
+      <xs:element name="Producer" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="code"  type="xs:string" use="required"/>
+          <xs:attribute name="name"  type="xs:string" use="required"/>
+          <xs:attribute name="vatId" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ============================================================= -->
+  <!--  BODY  (chapters > accounts > [lines], metrics on account/line) -->
+  <!-- ============================================================= -->
+  <xs:complexType name="BodyType">
+    <xs:sequence>
+      <xs:element name="Chapter" type="ChapterType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ChapterType">
+    <xs:sequence>
+      <xs:element name="GroupRef" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="group" type="xs:string" use="required"/>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Account" type="AccountType" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="code" type="xs:string" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <!-- The single point where the two profiles differ:
+       synthetic = metrics directly on the Account (via the Figures group)
+       analytic  = metrics per Line (department/producer); the account total is
+                   the sum of its lines. -->
+  <xs:complexType name="AccountType">
+    <xs:sequence>
+      <xs:choice>
+        <!-- synthetic: figures carried on the account itself -->
+        <xs:element name="Figures" type="FiguresType"/>
+        <!-- analytic: one or more breakdown lines, each with its own figures -->
+        <xs:element name="Line" type="LineType" maxOccurs="unbounded"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="code" type="xs:string" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="externalCode" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="LineType">
+    <xs:sequence>
+      <xs:element name="Figures" type="FiguresType"/>
+    </xs:sequence>
+    <xs:attribute name="ref"        type="xs:string" use="optional"/>
+    <xs:attribute name="name"       type="xs:string" use="optional"/>
+    <xs:attribute name="department" type="xs:string" use="optional"/>
+    <xs:attribute name="producer"   type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <!-- The cost report metrics. budget and efc are the core pair; the rest refine
+       the picture. An optional Benchmark sub-element carries week-over-week
+       comparison figures against the previous report. -->
+  <xs:complexType name="FiguresType">
+    <xs:sequence>
+      <xs:element name="Benchmark" type="BenchmarkType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="budget"        type="xs:decimal" use="required"/>
+    <xs:attribute name="spentToDate"   type="xs:decimal" use="optional"/>
+    <xs:attribute name="committed"     type="xs:decimal" use="optional"/>
+    <xs:attribute name="costToDate"    type="xs:decimal" use="optional"/>
+    <xs:attribute name="reserve"       type="xs:decimal" use="optional"/>
+    <xs:attribute name="efc"           type="xs:decimal" use="optional"/>
+    <xs:attribute name="variance"      type="xs:decimal" use="optional"/>
+    <xs:attribute name="estToComplete" type="xs:decimal" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="BenchmarkType">
+    <xs:attribute name="pastEfc"      type="xs:decimal" use="optional"/>
+    <xs:attribute name="pastVariance" type="xs:decimal" use="optional"/>
+    <xs:attribute name="movement"     type="xs:decimal" use="optional"/>
+  </xs:complexType>
+
+  <!-- ============================================================= -->
+  <!--  Simple types                                                  -->
+  <!-- ============================================================= -->
+  <xs:simpleType name="ProfileType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="synthetic"/>
+      <xs:enumeration value="analytic"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

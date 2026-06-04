@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Cost Report, analytic profile: Chapter > Account > Line (figures per line).
+     This is a mid-shoot cost report for the same fictitious production used in
+     the budget examples ("The Long Winter"), measured against budget revision
+     003. Figures are illustrative. All names are fictitious. -->
+<CostReport xmlns="urn:xopxf:costreport:1.0"
+            version="1.0" profile="analytic" language="en">
+
+  <Header>
+    <Transmission>
+      <Sender>
+        <Name>Northwind Pictures Ltd</Name>
+        <VatId>GB000000000</VatId>
+      </Sender>
+      <Recipient>
+        <Name>Acme Broadcasting Group</Name>
+      </Recipient>
+      <DocumentId>NWP-LONGWINTER-CR-012</DocumentId>
+      <IssueDate>2026-12-22</IssueDate>
+    </Transmission>
+
+    <Production>
+      <Code>LONGWINTER</Code>
+      <Title>The Long Winter</Title>
+      <Episodes>8</Episodes>
+      <Currency>EUR</Currency>
+    </Production>
+
+    <!-- Measured against the confirmed budget revision 003 -->
+    <BudgetReference productionCode="LONGWINTER" revision="003"
+                     documentId="NWP-LONGWINTER-BDG-003" date="2026-05-20"/>
+
+    <Reporting number="012" asOf="2026-12-20" fromDate="2026-12-14" toDate="2026-12-20"/>
+    <PreviousReport documentId="NWP-LONGWINTER-CR-011" number="011" asOf="2026-12-13"/>
+
+    <Groups>
+      <Group scheme="line" code="ATL"    name="Above the line"/>
+      <Group scheme="line" code="BTL"    name="Below the line"/>
+      <Group scheme="line" code="POST"   name="Post-production"/>
+      <Group scheme="line" code="TRAVEL" name="Travel and living"/>
+      <Group scheme="line" code="FEE"    name="Producer fee and overhead"/>
+    </Groups>
+
+    <Departments>
+      <Department code="CAST"  name="Cast"/>
+      <Department code="CAM"   name="Camera"/>
+      <Department code="LIGHT" name="Lighting"/>
+    </Departments>
+
+    <Producers>
+      <Producer code="NWP" name="Northwind Pictures Ltd"/>
+      <Producer code="SCP" name="Silverpeak Co-Production"/>
+    </Producers>
+  </Header>
+
+  <Body>
+
+    <Chapter code="1300" name="Principal cast">
+      <GroupRef group="ATL"/>
+      <Account code="1301" name="Lead cast" externalCode="013.001">
+        <Line ref="A004" name="Lead role" department="CAST" producer="NWP">
+          <Figures budget="195000" spentToDate="120000" committed="75000"
+                   costToDate="195000" efc="195000" variance="0" estToComplete="0">
+            <Benchmark pastEfc="195000" pastVariance="0" movement="0"/>
+          </Figures>
+        </Line>
+        <Line ref="A005" name="Co-lead role" department="CAST" producer="NWP">
+          <Figures budget="130000" spentToDate="80000" committed="50000"
+                   costToDate="130000" efc="130000" variance="0" estToComplete="0"/>
+        </Line>
+      </Account>
+    </Chapter>
+
+    <Chapter code="2400" name="Camera and lighting">
+      <GroupRef group="BTL"/>
+      <Account code="2401" name="Camera crew" externalCode="024.001">
+        <Line ref="B003" name="Director of photography" department="CAM" producer="NWP">
+          <Figures budget="76050" spentToDate="46800" committed="29250"
+                   costToDate="76050" efc="76050" variance="0" estToComplete="0"/>
+        </Line>
+        <Line ref="B004" name="Camera operators" department="CAM" producer="NWP">
+          <Figures budget="121680" spentToDate="74880" committed="46800"
+                   costToDate="121680" efc="121680" variance="0" estToComplete="0"/>
+        </Line>
+      </Account>
+      <Account code="2402" name="Camera equipment" externalCode="024.002">
+        <Line ref="B005" name="Camera package" department="CAM" producer="SCP">
+          <Figures budget="78000" spentToDate="48000" committed="36000"
+                   costToDate="84000" efc="84000" variance="-6000" estToComplete="0">
+            <Benchmark pastEfc="80000" pastVariance="-2000" movement="-4000"/>
+          </Figures>
+        </Line>
+      </Account>
+      <Account code="2403" name="Lighting" externalCode="024.003">
+        <Line ref="B006" name="Lighting crew" department="LIGHT" producer="NWP">
+          <Figures budget="126620" spentToDate="78000" committed="48620"
+                   costToDate="126620" efc="126620" variance="0" estToComplete="0"/>
+        </Line>
+      </Account>
+    </Chapter>
+
+    <Chapter code="3900" name="Contingency">
+      <GroupRef group="FEE"/>
+      <Account code="3901" name="General contingency" externalCode="039.001">
+        <Line ref="C001" name="Contingency reserve" producer="NWP">
+          <Figures budget="130000" spentToDate="0" committed="0" costToDate="0"
+                   reserve="130000" efc="124000" variance="6000" estToComplete="124000">
+            <Benchmark pastEfc="126000" pastVariance="4000" movement="2000"/>
+          </Figures>
+        </Line>
+      </Account>
+    </Chapter>
+
+  </Body>
+</CostReport>

@@ -34,7 +34,7 @@
       <head>
         <meta charset="UTF-8"/>
         <title>
-          <xsl:text>Budget </xsl:text>
+          <xsl:text>预算 </xsl:text>
           <xsl:value-of select="b:Header/b:Production/b:Title"/>
         </title>
         <style>
@@ -90,11 +90,11 @@
       <xsl:value-of select="b:Production/b:Title"/>
     </h1>
     <div class="sub">
-      <xsl:text>Production budget</xsl:text>
+      <xsl:text>制作预算</xsl:text>
       <xsl:if test="b:Production/b:Episodes">
         <xsl:text> &#183; </xsl:text>
         <xsl:value-of select="b:Production/b:Episodes"/>
-        <xsl:text> episodes</xsl:text>
+        <xsl:text> 集</xsl:text>
       </xsl:if>
     </div>
 
@@ -141,7 +141,7 @@
 
     <xsl:if test="b:Groups/b:Group">
       <div class="legend">
-        <b>Groups: </b>
+        <b>分组: </b>
         <xsl:for-each select="b:Groups/b:Group">
           <xsl:value-of select="@code"/>
           <xsl:text> = </xsl:text>
@@ -162,20 +162,20 @@
     <table>
       <thead>
         <tr>
-          <th>Chapter / Account / Item / Detail</th>
-          <th>Type</th>
-          <th>Phase</th>
-          <th class="num">Qty</th>
-          <th class="num">Unit price</th>
-          <th class="num">Net</th>
-          <th class="num">Charges</th>
-          <th class="num">Gross</th>
+          <th>章 / 科目 / 条目 / 明细</th>
+          <th>类型</th>
+          <th>阶段</th>
+          <th class="num">数量</th>
+          <th class="num">单价</th>
+          <th class="num">净额</th>
+          <th class="num">费用</th>
+          <th class="num">总额</th>
         </tr>
       </thead>
       <tbody>
         <xsl:apply-templates select="b:Body/b:Chapter"/>
         <tr class="total">
-          <td colspan="5">TOTAL BUDGET</td>
+          <td colspan="5">预算合计</td>
           <td class="num">
             <xsl:call-template name="fmt">
               <xsl:with-param name="n" select="sum(//b:Detail/@netAmount)"/>
